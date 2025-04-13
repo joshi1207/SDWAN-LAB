@@ -1,0 +1,687 @@
+
+*Mar 31 16:18:15.089: %DMI-5-AUTH_PASSED: R0/0: dmiauthd: User 'vmanage-admin' authenticated successfully from 100.1.1.12:44474 and was authorized for netconf over ssh. External groups:
+!
+! Last configuration change at 15:00:41 UTC Mon Mar 31 2025 by NETCONF
+!
+version 16.12
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+! Call-home is enabled by Smart-Licensing.
+service call-home
+platform qfp utilization monitor load 80
+platform punt-keepalive disable-kernel-core
+platform inspect match-statistics per-filter
+platform console serial
+!
+hostname cEdge-NewYork
+!
+boot-start-marker
+boot-end-marker
+!
+!
+vrf definition 1
+ description DATA VPN
+ rd 1:1
+ !
+ address-family ipv4
+  route-target export 65009:1
+  route-target import 65009:1
+ exit-address-family
+ !
+ address-family ipv6
+ exit-address-family
+!
+vrf definition 40
+ description public
+ rd 1:40
+ !
+ address-family ipv4
+  route-target export 65009:40
+  route-target import 65009:40
+ exit-address-family
+ !
+ address-family ipv6
+ exit-address-family
+!
+vrf definition 65528
+ !
+ address-family ipv4
+ exit-address-family
+!
+vrf definition Mgmt-intf
+ description MGMT VPN
+ rd 1:512
+ !
+ address-family ipv4
+  route-target export 65009:512
+  route-target import 65009:512
+ exit-address-family
+ !
+ address-family ipv6
+ exit-address-family
+!
+logging buffered 512000
+logging persistent size 104857600 filesize 10485760
+no logging rate-limit
+!
+aaa new-model
+!
+!
+aaa authentication login default local
+aaa authorization exec default local 
+!
+!
+!
+!
+!
+aaa session-id common
+call-home
+ ! If contact email address in call-home is configured as sch-smart-licensing@cisco.com
+ ! the email address configured in Cisco Smart License Portal will be used as contact email address to send SCH notifications.
+ contact-email-addr sch-smart-licensing@cisco.com
+ profile "CiscoTAC-1"
+  active
+  destination transport-method http
+  no destination transport-method email
+fhrp version vrrp v3
+!
+!
+!
+!
+!
+!
+!
+ip name-server vrf 40 8.8.4.4 8.8.8.8
+no ip dhcp use class
+!
+!
+!
+no ip igmp ssm-map query dns
+login on-success log
+ipv6 unicast-routing
+!
+!
+!
+!
+!
+!
+!
+subscriber templating
+! 
+! 
+! 
+! 
+!
+!
+!
+flow record sdwan_flow_record
+ description flow and application visibility records
+ match ipv4 destination address
+ match ipv4 protocol
+ match ipv4 source address
+ match routing vrf service
+ match transport destination-port
+ match transport source-port
+ collect application name
+ collect connection id long
+ collect counter bytes long
+ collect counter bytes sdwan dropped long
+ collect counter packets long
+ collect counter packets sdwan dropped long
+ collect counter packets sdwan pkt-cxp-d-pkts
+ collect counter packets appqoe fec-d-pkts
+ collect counter packets appqoe fec-r-pkts
+ collect counter packets appqoe pkt-dup-d-pkts-orig
+ collect counter packets appqoe pkt-dup-d-pkts-dup
+ collect counter packets appqoe pkt-dup-r-pkts
+ collect flow end-reason
+ collect interface input
+ collect interface output
+ collect ipv4 dscp
+ collect overlay session id input
+ collect overlay session id output
+ collect timestamp absolute first
+ collect timestamp absolute last
+ collect transport tcp flags
+ collect drop cause id
+ collect sdwan sla-not-met
+ collect sdwan preferred-color-not-met
+ collect sdwan qos-queue-id
+!
+!
+flow exporter sdwan_flow_exporter_0
+ description export flow and application visibility records to vManage
+ destination local sdwan
+ transport udp 5458
+ export-protocol ipfix
+ option drop-cause-table
+ option application-attributes
+ option application-table
+!
+!
+flow monitor sdwan_flow_monitor
+ description monitor flows for vManage and external collectors
+ exporter sdwan_flow_exporter_0
+ cache timeout inactive 10
+ cache timeout active 60
+ record sdwan_flow_record
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+crypto pki trustpoint TP-self-signed-2833272671
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-2833272671
+ revocation-check crl
+ rsakeypair TP-self-signed-2833272671
+!
+crypto pki trustpoint SLA-TrustPoint
+ enrollment pkcs12
+ revocation-check crl
+!
+!
+crypto pki certificate chain TP-self-signed-2833272671
+ certificate self-signed 01
+  30820330 30820218 A0030201 02020101 300D0609 2A864886 F70D0101 05050030 
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 32383333 32373236 3731301E 170D3235 30333331 31323536 
+  31375A17 0D333030 31303130 30303030 305A3031 312F302D 06035504 03132649 
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D32 38333332 
+  37323637 31308201 22300D06 092A8648 86F70D01 01010500 0382010F 00308201 
+  0A028201 01008C3D DD38300E B28AD2B9 BB071531 FB42889F 43DB54F9 15C0155B 
+  79D79611 AF8E3591 DDB6DA4D AD7B5AA4 23DA8CB5 898CF6B2 90E6AC0B 849C79E6 
+  0C0F34E2 E04CF7AB 8F306DD2 D98CBCCF 18BEA176 DD5FBEE6 0A1C1761 3A52B521 
+  54D44F2E 0F488E04 E6412483 C41EC0BF A9602CBA 63606621 7DEBFEED F7050494 
+  D306C8EC 3F7A4014 41858224 7E926357 56279418 206F9740 1DC8FDAA E772A4AE 
+  3D1EC43D 9ED73501 22FB2B13 8DBAD043 DC220147 AE2D424E 6DC1589F 7EFE92BD 
+  44B6F010 F282CBE1 FA2809D6 8665277A AB2AF5D7 1899144C 8B2620BD 1701B8D2 
+  EAB1F819 51A1EFF8 8CB0C7B4 193E594C 0E8151BE 62DAC505 82D10B58 EA935C3E 
+  1D74A50B C9710203 010001A3 53305130 0F060355 1D130101 FF040530 030101FF 
+  301F0603 551D2304 18301680 1441C232 708F845B 3EAD303B 57648515 A3607ABC 
+  E7301D06 03551D0E 04160414 41C23270 8F845B3E AD303B57 648515A3 607ABCE7 
+  300D0609 2A864886 F70D0101 05050003 82010100 432A49A6 18107CDF E721E9A8 
+  A248A39B 7574BB02 256BF851 C65B18C6 561085AD 64F3D8EC 7838F1A9 2DE1F3A5 
+  6B38F0B3 2338251E A93A60BE 9E757C8B 4C6A83DF BAB03F91 244CF2EE CD969B44 
+  E0CFAE5B 626C7537 0B0B838E 89E61812 A9EF3DB4 2939EE1F 396D1077 7096BC1A 
+  09AA3573 41928116 AE0EEBB4 252A9CF0 E99C0E10 974CFD9E 9EADF907 CDBE6E93 
+  696D8F9D D1081328 B543FDCC 848BDA37 7296C4FB A5755055 0B715C37 59E7D333 
+  55CE7234 BD29D683 65C5F976 53C756E5 0B5C0792 3DB46073 17864D37 CED6B6B6 
+  9C7C5569 8E3AE63F 9478EF06 62417621 67F999F6 016E928D 9C155014 78557789 
+  DC2F56E6 0358F516 52E2C9B7 6112CBBC D4F9AC69
+  quit
+crypto pki certificate chain SLA-TrustPoint
+ certificate ca 01
+  30820321 30820209 A0030201 02020101 300D0609 2A864886 F70D0101 0B050030 
+  32310E30 0C060355 040A1305 43697363 6F312030 1E060355 04031317 43697363 
+  6F204C69 63656E73 696E6720 526F6F74 20434130 1E170D31 33303533 30313934 
+  3834375A 170D3338 30353330 31393438 34375A30 32310E30 0C060355 040A1305 
+  43697363 6F312030 1E060355 04031317 43697363 6F204C69 63656E73 696E6720 
+  526F6F74 20434130 82012230 0D06092A 864886F7 0D010101 05000382 010F0030 
+  82010A02 82010100 A6BCBD96 131E05F7 145EA72C 2CD686E6 17222EA1 F1EFF64D 
+  CBB4C798 212AA147 C655D8D7 9471380D 8711441E 1AAF071A 9CAE6388 8A38E520 
+  1C394D78 462EF239 C659F715 B98C0A59 5BBB5CBD 0CFEBEA3 700A8BF7 D8F256EE 
+  4AA4E80D DB6FD1C9 60B1FD18 FFC69C96 6FA68957 A2617DE7 104FDC5F EA2956AC 
+  7390A3EB 2B5436AD C847A2C5 DAB553EB 69A9A535 58E9F3E3 C0BD23CF 58BD7188 
+  68E69491 20F320E7 948E71D7 AE3BCC84 F10684C7 4BC8E00F 539BA42B 42C68BB7 
+  C7479096 B4CB2D62 EA2F505D C7B062A4 6811D95B E8250FC4 5D5D5FB8 8F27D191 
+  C55F0D76 61F9A4CD 3D992327 A8BB03BD 4E6D7069 7CBADF8B DF5F4368 95135E44 
+  DFC7C6CF 04DD7FD1 02030100 01A34230 40300E06 03551D0F 0101FF04 04030201 
+  06300F06 03551D13 0101FF04 05300301 01FF301D 0603551D 0E041604 1449DC85 
+  4B3D31E5 1B3E6A17 606AF333 3D3B4C73 E8300D06 092A8648 86F70D01 010B0500 
+  03820101 00507F24 D3932A66 86025D9F E838AE5C 6D4DF6B0 49631C78 240DA905 
+  604EDCDE FF4FED2B 77FC460E CD636FDB DD44681E 3A5673AB 9093D3B1 6C9E3D8B 
+  D98987BF E40CBD9E 1AECA0C2 2189BB5C 8FA85686 CD98B646 5575B146 8DFC66A8 
+  467A3DF4 4D565700 6ADF0F0D CF835015 3C04FF7C 21E878AC 11BA9CD2 55A9232C 
+  7CA7B7E6 C1AF74F6 152E99B7 B1FCF9BB E973DE7F 5BDDEB86 C71E3B49 1765308B 
+  5FB0DA06 B92AFE7F 494E8A9E 07B85737 F3A58BE1 1A48A229 C37C1E69 39F08678 
+  80DDCD16 D6BACECA EEBC7CF9 8428787B 35202CDC 60E4616A B623CDBD 230E3AFB 
+  418616A9 4093E049 4D10AB75 27E86F73 932E35B5 8862FDAE 0275156F 719BB2F0 
+  D697DF7F 28
+  quit
+!
+license udi pid CSR1000V sn 9LCL7OIX9MO
+diagnostic bootup level minimal
+memory free low-watermark processor 72331
+!
+!
+spanning-tree extend system-id
+!
+username admin privilege 15 secret 9 $9$3V6L3V6L2VUI2k$ysPnXOdg8RLj9KgMdmfHdSHkdaMmiHzGaUpcqH6pfTo
+!
+redundancy
+!
+!
+!
+no crypto ikev2 diagnose error
+!
+!
+!
+! 
+crypto keyring if-ipsec401-ikev1-keyring  
+  pre-shared-key address 136.226.94.2 key Liverpool1$
+crypto keyring if-ipsec402-ikev1-keyring  
+  pre-shared-key address 165.226.94.2 key Liverpool1$
+!
+!
+!
+!
+!
+!
+crypto isakmp policy 401
+ encryption aes 256
+ authentication pre-share
+ group 2
+ lifetime 14400
+!
+crypto isakmp policy 402
+ encryption aes 256
+ authentication pre-share
+ group 2
+ lifetime 14400
+crypto isakmp keepalive 10 3
+crypto isakmp profile if-ipsec401-ikev1-isakmp-profile
+   keyring if-ipsec401-ikev1-keyring
+   match identity address 136.226.94.2 255.255.255.255 
+crypto isakmp profile if-ipsec402-ikev1-isakmp-profile
+   keyring if-ipsec402-ikev1-keyring
+   match identity address 165.226.94.2 255.255.255.255 
+!
+!
+crypto ipsec transform-set if-ipsec401-ikev1-transform esp-aes 256 esp-sha256-hmac 
+ mode tunnel
+crypto ipsec transform-set if-ipsec402-ikev1-transform esp-aes 256 esp-sha256-hmac 
+ mode tunnel
+!
+!
+crypto ipsec profile if-ipsec401-ipsec-profile
+ set security-association lifetime kilobytes disable
+ set security-association lifetime seconds 14400
+ set security-association replay window-size 512 
+ set transform-set if-ipsec401-ikev1-transform 
+ set pfs group2
+ set isakmp-profile if-ipsec401-ikev1-isakmp-profile
+!
+crypto ipsec profile if-ipsec402-ipsec-profile
+ set security-association lifetime kilobytes disable
+ set security-association lifetime seconds 14400
+ set security-association replay window-size 512 
+ set transform-set if-ipsec402-ikev1-transform 
+ set pfs group2
+ set isakmp-profile if-ipsec402-ikev1-isakmp-profile
+!
+!
+!
+!
+!
+! 
+! 
+!
+!
+interface Loopback401
+ no shutdown
+ description loopback interface for tunnel 401
+ ip address 192.168.61.41 255.255.255.255
+ no ip redirects
+ ip mtu 1500
+!
+interface Loopback402
+ no shutdown
+ description loopback interface for tunnel 402
+ ip address 192.168.61.42 255.255.255.255
+ no ip redirects
+ ip mtu 1500
+!
+interface Loopback65528
+ no shutdown
+ vrf forwarding 65528
+ ip address 192.168.1.1 255.255.255.255
+!
+interface Tunnel1
+ no shutdown
+ ip unnumbered GigabitEthernet1
+ no ip redirects
+ ipv6 unnumbered GigabitEthernet1
+ no ipv6 redirects
+ tunnel source GigabitEthernet1
+ tunnel mode sdwan
+!
+interface Tunnel100401
+ no shutdown
+ description Active DC-TUN1
+ vrf forwarding 40
+ ip address 192.168.61.197 255.255.255.252
+ ip mtu 1400
+ ip tcp adjust-mss 1360
+ tunnel source Loopback401
+ tunnel mode ipsec ipv4
+ tunnel destination 136.226.94.2
+ tunnel path-mtu-discovery
+ tunnel protection ipsec profile if-ipsec401-ipsec-profile
+!
+interface Tunnel100402
+ no shutdown
+ description Secondary DC-TUN1
+ vrf forwarding 40
+ ip address 192.168.61.201 255.255.255.252
+ ip mtu 1400
+ ip tcp adjust-mss 1360
+ tunnel source Loopback402
+ tunnel mode ipsec ipv4
+ tunnel destination 165.226.94.2
+ tunnel path-mtu-discovery
+ tunnel protection ipsec profile if-ipsec402-ipsec-profile
+!
+interface GigabitEthernet1
+ no shutdown
+ ip address 118.1.6.1 255.255.255.0
+ no ip redirects
+ ip nat outside
+ load-interval 30
+ negotiation auto
+ arp timeout 1200
+ no mop enabled
+ no mop sysid
+!
+interface GigabitEthernet2
+ no shutdown
+ description LAN1-PUBLIC
+ vrf forwarding 40
+ ip address 192.168.61.0 255.255.255.254
+ no ip redirects
+ ip nbar protocol-discovery
+ load-interval 30
+ negotiation auto
+ arp timeout 1200
+ no mop enabled
+ no mop sysid
+!
+interface GigabitEthernet3
+ no shutdown
+ vrf forwarding 1
+ ip address 172.176.1.1 255.255.255.0
+ no ip redirects
+ ip nbar protocol-discovery
+ load-interval 30
+ negotiation auto
+ arp timeout 1200
+ no mop enabled
+ no mop sysid
+!
+interface GigabitEthernet4
+ no shutdown
+ vrf forwarding Mgmt-intf
+ ip dhcp client default-router distance 1
+ ip address dhcp client-id GigabitEthernet4
+ no ip redirects
+ load-interval 30
+ negotiation auto
+ arp timeout 1200
+ no mop enabled
+ no mop sysid
+!
+router omp
+!
+router bgp 65009
+ bgp log-neighbor-changes
+ timers bgp 4 12
+ distance bgp 20 200 20
+ !
+ address-family ipv4 vrf 1
+  bgp router-id 1.1.1.1
+  network 0.0.0.0
+  redistribute omp
+  propagate-aspath
+  neighbor 172.176.1.2 remote-as 64707
+  neighbor 172.176.1.2 description LAN2-corp
+  neighbor 172.176.1.2 activate
+  neighbor 172.176.1.2 send-community
+  neighbor 172.176.1.2 route-map TO-LAN out
+ exit-address-family
+ !
+ address-family ipv4 vrf 40
+  bgp router-id 40.40.40.40
+  network 0.0.0.0
+  neighbor 192.168.61.1 remote-as 64707
+  neighbor 192.168.61.1 description LAN2-PUBLIC
+  neighbor 192.168.61.1 activate
+  neighbor 192.168.61.1 send-community
+  neighbor 192.168.61.1 route-map TO-LAN out
+ exit-address-family
+!
+ip forward-protocol nd
+ip visibility global flow monitor sdwan_flow_monitor input
+no ip http server
+ip http secure-server
+!
+ip nat route vrf 65528 0.0.0.0 0.0.0.0 global
+ip nat route vrf 40 136.226.94.0 255.255.255.248 global
+ip nat route vrf 40 165.226.94.0 255.255.255.248 global
+ip nat translation tcp-timeout 3600
+ip nat translation udp-timeout 60
+no ip nat service skinny tcp port 2000
+no ip nat service sip tcp port 5060
+no ip nat service sip udp port 5060
+no ip nat service H225
+no ip nat service ras
+no ip nat service rtsp udp
+no ip nat service rtsp tcp
+no ip nat service dns tcp
+no ip nat service dns udp
+no ip nat service netbios-ns tcp
+no ip nat service netbios-ns udp
+no ip nat service netbios-ssn
+no ip nat service netbios-dgm
+no ip nat service ldap
+no ip nat service sunrpc udp
+no ip nat service sunrpc tcp
+no ip nat service msrpc tcp
+no ip nat service tftp
+no ip nat service rcmd
+no ip nat service pptp
+no ip nat service ftp
+no ip nat service gatekeeper
+no ip nat service dns-reset-ttl
+ip nat inside source list nat-dia-vpn-hop-access-list interface GigabitEthernet1 overload
+ip route 0.0.0.0 0.0.0.0 118.1.6.2
+ip route vrf 40 0.0.0.0 0.0.0.0 Tunnel100401
+ip route vrf 40 0.0.0.0 0.0.0.0 Tunnel100402 2
+ip scp server enable
+!
+!
+!
+ip prefix-list Default_route seq 5 permit 0.0.0.0/0
+!
+!
+route-map TO-LAN permit 1 
+ match ip address prefix-list Default_route
+!
+route-map TO-LAN permit 65535 
+!
+snmp-server view cisco internet.* included
+snmp-server location NewYork
+snmp-server contact Himanshu Joshi
+snmp-server enable traps snmp authentication linkdown linkup coldstart warmstart
+snmp-server enable traps vrrp
+snmp-server enable traps pfr
+snmp-server enable traps flowmon
+snmp-server enable traps ds1
+snmp-server enable traps entity-perf throughput-notif
+snmp-server enable traps call-home message-send-fail server-fail
+snmp-server enable traps tty
+snmp-server enable traps casa
+snmp-server enable traps ospf state-change
+snmp-server enable traps ospf errors
+snmp-server enable traps ospf retransmit
+snmp-server enable traps ospf lsa
+snmp-server enable traps ospf cisco-specific state-change nssa-trans-change
+snmp-server enable traps ospf cisco-specific state-change shamlink interface
+snmp-server enable traps ospf cisco-specific state-change shamlink neighbor
+snmp-server enable traps ospf cisco-specific errors
+snmp-server enable traps ospf cisco-specific retransmit
+snmp-server enable traps ospf cisco-specific lsa
+snmp-server enable traps eigrp
+snmp-server enable traps cnpd
+snmp-server enable traps adslline
+snmp-server enable traps vdsl2line
+snmp-server enable traps license
+snmp-server enable traps smart-license
+snmp-server enable traps ethernet evc status create delete
+snmp-server enable traps ether-oam
+snmp-server enable traps ethernet cfm cc mep-up mep-down cross-connect loop config
+snmp-server enable traps ethernet cfm crosscheck mep-missing mep-unknown service-up
+snmp-server enable traps entity-qfp mem-res-thresh throughput-notif
+snmp-server enable traps entity-state
+snmp-server enable traps diameter
+snmp-server enable traps bgp
+snmp-server enable traps bgp cbgp2
+snmp-server enable traps dlsw
+snmp-server enable traps entity-sensor
+snmp-server enable traps resource-policy
+snmp-server enable traps flash insertion removal lowspace
+snmp-server enable traps nhrp nhs
+snmp-server enable traps nhrp nhc
+snmp-server enable traps nhrp nhp
+snmp-server enable traps nhrp quota-exceeded
+snmp-server enable traps ipsla
+snmp-server enable traps entity-diag boot-up-fail hm-test-recover hm-thresh-reached scheduled-test-fail
+snmp-server enable traps auth-framework sec-violation
+snmp-server enable traps bfd
+snmp-server enable traps cef resource-failure peer-state-change peer-fib-state-change inconsistency
+snmp-server enable traps memory bufferpeak
+snmp-server enable traps config-copy
+snmp-server enable traps config
+snmp-server enable traps config-ctid
+snmp-server enable traps dhcp
+snmp-server enable traps fru-ctrl
+snmp-server enable traps entity
+snmp-server enable traps event-manager
+snmp-server enable traps vrrpv3
+snmp-server enable traps frame-relay
+snmp-server enable traps frame-relay subif
+snmp-server enable traps hsrp
+snmp-server enable traps pimstdmib neighbor-loss invalid-register invalid-join-prune rp-mapping-change interface-election
+snmp-server enable traps ipmulticast
+snmp-server enable traps isis
+snmp-server enable traps ip local pool
+snmp-server enable traps msdp
+snmp-server enable traps mvpn
+snmp-server enable traps ospfv3 state-change
+snmp-server enable traps ospfv3 errors
+snmp-server enable traps pim neighbor-change rp-mapping-change invalid-pim-message
+snmp-server enable traps pppoe
+snmp-server enable traps cpu threshold
+snmp-server enable traps rsvp
+snmp-server enable traps l2tun session
+snmp-server enable traps l2tun pseudowire status
+snmp-server enable traps aaa_server
+snmp-server enable traps atm subif
+snmp-server enable traps pki
+snmp-server enable traps ike policy add
+snmp-server enable traps ike policy delete
+snmp-server enable traps ike tunnel start
+snmp-server enable traps ike tunnel stop
+snmp-server enable traps ipsec cryptomap add
+snmp-server enable traps ipsec cryptomap delete
+snmp-server enable traps ipsec cryptomap attach
+snmp-server enable traps ipsec cryptomap detach
+snmp-server enable traps ipsec tunnel start
+snmp-server enable traps ipsec tunnel stop
+snmp-server enable traps ipsec too-many-sas
+snmp-server enable traps gdoi gm-start-registration
+snmp-server enable traps gdoi gm-registration-complete
+snmp-server enable traps gdoi gm-re-register
+snmp-server enable traps gdoi gm-rekey-rcvd
+snmp-server enable traps gdoi gm-rekey-fail
+snmp-server enable traps gdoi ks-rekey-pushed
+snmp-server enable traps gdoi gm-incomplete-cfg
+snmp-server enable traps gdoi ks-no-rsa-keys
+snmp-server enable traps gdoi ks-new-registration
+snmp-server enable traps gdoi ks-reg-complete
+snmp-server enable traps gdoi ks-role-change
+snmp-server enable traps gdoi ks-gm-deleted
+snmp-server enable traps gdoi ks-peer-reachable
+snmp-server enable traps gdoi ks-peer-unreachable
+snmp-server enable traps firewall serverstatus
+snmp-server enable traps dsp card-status
+snmp-server enable traps dsp oper-state
+snmp-server enable traps dsp video-usage
+snmp-server enable traps dsp video-out-of-resource
+snmp-server enable traps frame-relay multilink bundle-mismatch
+snmp-server enable traps syslog
+snmp-server enable traps mpls rfc ldp
+snmp-server enable traps mpls ldp
+snmp-server enable traps mpls rfc traffic-eng
+snmp-server enable traps mpls traffic-eng
+snmp-server enable traps mpls fast-reroute protected
+snmp-server enable traps otn
+snmp-server enable traps pw vc
+snmp-server enable traps lisp
+snmp-server enable traps dial
+snmp-server enable traps sbc adj-status
+snmp-server enable traps sbc blacklist
+snmp-server enable traps sbc congestion-alarm
+snmp-server enable traps sbc h248-ctrlr-status
+snmp-server enable traps sbc media-source
+snmp-server enable traps sbc radius-conn-status
+snmp-server enable traps sbc sla-violation
+snmp-server enable traps sbc sla-violation-rev1
+snmp-server enable traps sbc svc-state
+snmp-server enable traps sbc qos-statistics
+snmp-server enable traps ethernet cfm alarm
+snmp-server enable traps alarms informational
+snmp-server enable traps rf
+snmp-server enable traps transceiver all
+snmp-server enable traps bulkstat collection transfer
+snmp-server enable traps vrfmib vrf-up vrf-down vnet-trunk-up vnet-trunk-down
+snmp-server enable traps mpls vpn
+snmp-server enable traps mpls rfc vpn
+snmp-server enable traps voice
+snmp-server enable traps ccme
+snmp-server enable traps srst
+!
+!
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+line con 0
+ stopbits 1
+ speed 115200
+line vty 0 4
+ transport input ssh
+line vty 5 80
+ transport input ssh
+!
+nat64 translation timeout udp 300
+nat64 translation timeout tcp 3600
+!
+!
+!
+!
+!
+netconf-yang
+netconf-yang feature candidate-datastore
+end
+
+cEdge-NewYork

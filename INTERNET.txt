@@ -1,0 +1,187 @@
+
+!
+! Last configuration change at 16:48:31 UTC Tue Apr 1 2025
+!
+version 15.5
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname INTERNET
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+no aaa new-model
+!
+!
+!
+bsd-client server url https://cloudsso.cisco.com/as/token.oauth2
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+
+
+!
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+cts logging verbose
+!
+!
+!
+redundancy
+!
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Ethernet0/0
+ no shutdown
+ description HQ-WAN
+ ip address 118.1.1.2 255.255.255.0
+ ip nat inside
+ ip virtual-reassembly in
+!
+interface Ethernet0/1
+ no shutdown
+ description vEdge-DUBAI-INET
+ ip address 118.1.2.2 255.255.255.0
+ ip nat inside
+ ip virtual-reassembly in
+!
+interface Ethernet0/2
+ no shutdown
+ description vEdge3-HONKONG
+ ip address 118.1.3.2 255.255.255.0
+ ip nat inside
+ ip virtual-reassembly in
+!
+interface Ethernet0/3
+ no shutdown
+ description vEdge4-PARIS
+ ip address 118.1.4.2 255.255.255.0
+ ip nat inside
+ ip virtual-reassembly in
+!
+interface Ethernet1/0
+ no shutdown
+ description cEdge5-SINGAPORE
+ ip address 118.1.5.2 255.255.255.0
+ ip nat inside
+ ip virtual-reassembly in
+!
+interface Ethernet1/1
+ no shutdown
+ description DIA
+ ip address dhcp
+ ip nat outside
+ ip virtual-reassembly in
+!
+interface Ethernet1/2
+ no shutdown
+ description vEdge-NewYork
+ ip address 118.1.6.2 255.255.255.0
+ ip nat inside
+ ip virtual-reassembly in
+!
+interface Ethernet1/3
+ no shutdown
+ description PWIFI-ZS
+ ip address 136.226.94.1 255.255.255.248
+!
+interface Ethernet2/0
+ no shutdown
+ description PWIFI-ZSDC2
+ ip address 165.226.94.1 255.255.255.248
+!
+interface Ethernet2/1
+ no shutdown
+ no ip address
+ shutdown
+!
+interface Ethernet2/2
+ no shutdown
+ no ip address
+ shutdown
+!
+interface Ethernet2/3
+ no shutdown
+ no ip address
+ shutdown
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+ip nat inside source list nat interface Ethernet1/1 overload
+ip route 11.61.1.0 255.255.255.248 118.1.6.1
+ip route 12.61.1.0 255.255.255.248 136.226.94.2
+ip route 13.61.1.0 255.255.255.248 165.226.94.2
+ip route 100.1.1.0 255.255.255.0 118.1.1.1
+!
+ip access-list extended nat
+ permit icmp 118.1.0.0 0.0.255.255 any
+ permit tcp 11.0.0.0 0.0.0.255 any eq 443
+ deny   udp any any eq 12346 12366 12386 12406 12426
+ permit ip any any
+!
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+!
+!
+line con 0
+ logging synchronous
+line aux 0
+line vty 0 4
+ login
+ transport input none
+!
+!
+end

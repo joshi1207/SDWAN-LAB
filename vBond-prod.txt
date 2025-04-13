@@ -1,0 +1,83 @@
+system
+ host-name               vBond-prod
+ system-ip               100.1.1.14
+ site-id                 1
+ admin-tech-on-failure
+ no route-consistency-check
+ no vrrp-advt-with-phymac
+ sp-organization-name    him-lab
+ organization-name       him-lab
+ vbond 100.1.1.4 local
+ aaa
+  auth-order      local radius tacacs
+  usergroup basic
+   task system read
+   task interface read
+  !
+  usergroup netadmin
+  !
+  usergroup operator
+   task system read
+   task interface read
+   task policy read
+   task routing read
+   task security read
+  !
+  usergroup tenantadmin
+  !
+  user admin
+   password $6$544a20b80f4bde20$0nyqKzSCg/xF6IFGwZYB8GoQgZdkpJVV6c0LPKmm0a1R/kN5tMjbjpYWXLpTVNGIr7BQG.c5FKpOH3vuLjNbF0
+  !
+  ciscotacro-user true
+  ciscotacrw-user true
+ !
+ logging
+  disk
+   enable
+  !
+ !
+ ntp
+  parent
+   no enable
+   stratum 5
+  exit
+ !
+!
+omp
+ no shutdown
+ graceful-restart
+ advertise connected
+ advertise static
+!
+security
+ ipsec
+  integrity-type ip-udp-esp esp
+ !
+!
+vpn 0
+ interface ge0/0
+  ip address 100.1.1.4/24
+  tunnel-interface
+   encapsulation ipsec
+   allow-service all
+   no allow-service bgp
+   allow-service dhcp
+   allow-service dns
+   allow-service icmp
+   allow-service sshd
+   allow-service netconf
+   no allow-service ntp
+   no allow-service ospf
+   no allow-service stun
+   allow-service https
+  !
+  no shutdown
+ !
+ ip route 0.0.0.0/0 100.1.1.1
+!
+vpn 512
+ interface eth0
+  ip address 192.168.100.4/24
+  no shutdown
+ !
+!

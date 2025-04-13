@@ -1,0 +1,82 @@
+system
+ host-name             vManage-prod
+ system-ip             100.1.1.12
+ site-id               1
+ admin-tech-on-failure
+ no vrrp-advt-with-phymac
+ sp-organization-name  him-lab
+ organization-name     him-lab
+ vbond 100.1.1.4
+ aaa
+  auth-order      local radius tacacs
+  usergroup basic
+   task system read
+   task interface read
+  !
+  usergroup global
+  !
+  usergroup netadmin
+  !
+  usergroup operator
+   task system read
+   task interface read
+   task policy read
+   task routing read
+   task security read
+  !
+  usergroup resource_group_admin
+   task system read
+   task interface read
+  !
+  usergroup resource_group_basic
+   task system read
+   task interface read
+  !
+  usergroup resource_group_operator
+   task system read
+   task interface read
+  !
+  usergroup tenantadmin
+  !
+  user admin
+   password $6$a74868bb7a64f28f$9WV5/naZxRECstzeS8ojvETnGHQAdxbp67SO22K5km4.3SCMnMw8az0/VJOTVURW9nArwVALytB613fqwfy9X/
+  !
+  ciscotacro-user true
+  ciscotacrw-user true
+ !
+ logging
+  disk
+   enable
+  !
+ !
+ ntp
+  parent
+   no enable
+   stratum 5
+  exit
+ !
+!
+vpn 0
+ interface eth1
+  ip address 100.1.1.2/24
+  tunnel-interface
+   allow-service all
+   allow-service dhcp
+   allow-service dns
+   allow-service icmp
+   no allow-service sshd
+   no allow-service netconf
+   no allow-service ntp
+   no allow-service stun
+   allow-service https
+  !
+  no shutdown
+ !
+ ip route 0.0.0.0/0 100.1.1.1
+!
+vpn 512
+ interface eth0
+  ip address 192.168.100.2/24
+  no shutdown
+ !
+!

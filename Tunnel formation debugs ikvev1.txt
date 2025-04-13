@@ -1,0 +1,530 @@
+*Feb  5 16:25:58.548: insert of map into mapdb AVL failed, map + ace pair already exists on the mapdb
+*Feb  5 16:25:58.638: %CRYPTO-6-ISAKMP_ON_OFF: ISAKMP is ON
+*Feb  5 16:25:58.693: IPSEC(recalculate_mtu): reset sadb_root 7FABD7F1B7C8 mtu to 1500
+*Feb  5 16:25:58.700: IPSEC(sa_request): ,
+  (key eng. msg.) OUTBOUND local= 165.226.94.2:500, remote= 118.1.6.1:500,
+    local_proxy= 0.0.0.0/0.0.0.0/256/0,
+    remote_proxy= 0.0.0.0/0.0.0.0/256/0,
+    protocol= ESP, transform= esp-aes 256 esp-sha-hmac  (Tunnel), esn= FALSE,
+    lifedur= 14400s and 4294967295kb, 
+    spi= 0x0(0), conn_id= 0, keysize= 256, flags= 0x0
+*Feb  5 16:25:58.776: ISAKMP: (0):SA request profile is if-ipsec402-ikev1-isakmp-profile
+*Feb  5 16:25:58.781: ISAKMP: (0):Created a peer struct for 118.1.6.1, peer port 500
+*Feb  5 16:25:58.784: ISAKMP: (0):New peer created peer = 0x80007FABD5968EB0 peer_handle = 0x8000000040000002
+*Feb  5 16:25:58.795: ISAKMP: (0):Locking peer struct 0x80007FABD5968EB0, refcount 1 for isakmp_initiator
+*Feb  5 16:25:58.800: ISAKMP: (0):local port 500, remote port 500
+*Feb  5 16:25:59.066: ISAKMP: (0):set new node 0 to QM_IDLE      
+*Feb  5 16:25:59.127: ISAKMP: (0):insert sa successfully sa = 80007FAC47C46C90
+*Feb  5 16:25:59.337: ISAKMP: (0):Can not start Aggressive mode, trying Main mode.
+*Feb  5 16:25:59.484: ISAKMP-ERROR: (0):Profile has no keyring, aborting key search
+*Feb  5 16:26:00.142: ISAKMP-ERROR: (0):Profile has no keyring, aborting host key search
+*Feb  5 16:26:00.236: ISAKMP-ERROR: (0):No Cert or pre-shared address key. 
+*Feb  5 16:26:00.265: ISAKMP-ERROR: (0):construct_initial_message: Can not start Main mode
+*Feb  5 16:26:00.290: ISAKMP: (0):Unlocking peer struct 0x80007FABD5968EB0 for isadb_unlock_peer_delete_sa(), count 0
+*Feb  5 16:26:00.299: ISAKMP: (0):Deleting peer node by peer_reap for 118.1.6.1: 80007FABD5968EB0
+*Feb  5 16:26:00.339: ISAKMP: (0):purging SA., sa=80007FAC47C46C90, delme=80007FAC47C46C90
+*Feb  5 16:26:00.343: ISAKMP: (0):purging node 3742148862
+*Feb  5 16:26:00.349: ISAKMP-ERROR: (0):Error while processing SA request: Failed to initialize SA
+*Feb  5 16:26:00.353: ISAKMP-ERROR: (0):Error while processing KMI message 0, error 2.
+*Feb  5 16:26:00.451: IPSEC(key_engine): got a queue event with 1 KMI message(s)
+*Feb  5 16:26:00.743: %SYS-5-CONFIG_I: Configured from console by console
+*Feb  5 16:26:01.321: ISAKMP-PAK: (0):received packet from 118.1.6.1 dport 500 sport 512 Global (N) NEW SA
+*Feb  5 16:26:01.323: ISAKMP: (0):Created a peer struct for 118.1.6.1, peer port 512
+*Feb  5 16:26:01.324: ISAKMP: (0):New peer created peer = 0x80007FABD5969120 peer_handle = 0x8000000040000003
+*Feb  5 16:26:01.325: ISAKMP: (0):Locking peer struct 0x80007FABD5969120, refcount 1 for crypto_isakmp_process_block
+*Feb  5 16:26:01.328: ISAKMP: (0):local port 500, remote port 512
+*Feb  5 16:26:01.329: ISAKMP: (0):insert sa successfully sa = 80007FAC47C46C90
+*Feb  5 16:26:01.376: ISAKMP: (0):Input = IKE_MESG_FROM_PEER, IKE_MM_EXCH
+*Feb  5 16:26:01.377: ISAKMP: (0):Old State = IKE_READY  New State = IKE_R_MM1 
+*Feb  5 16:26:01.629: ISAKMP: (0):processing SA payload. message ID = 0
+*Feb  5 16:26:01.630: ISAKMP: (0):processing vendor id payload
+*Feb  5 16:26:01.631: ISAKMP: (0):vendor ID seems Unity/DPD but major 69 mismatch
+*Feb  5 16:26:01.635: ISAKMP: (0):vendor ID is NAT-T RFC 3947
+*Feb  5 16:26:01.637: ISAKMP: (0):processing vendor id payload
+*Feb  5 16:26:01.638: ISAKMP: (0):vendor ID seems Unity/DPD but major 245 mismatch
+*Feb  5 16:26:01.639: ISAKMP: (0):vendor ID is NAT-T v7
+*Feb  5 16:26:01.641: ISAKMP: (0):processing vendor id payload
+*Feb  5 16:26:01.642: ISAKMP: (0):vendor ID seems Unity/DPD but major 157 mismatch
+*Feb  5 16:26:01.644: ISAKMP: (0):vendor ID is NAT-T v3
+*Feb  5 16:26:01.645: ISAKMP: (0):processing vendor id payload
+*Feb  5 16:26:01.646: ISAKMP: (0):vendor ID seems Unity/DPD but major 123 mismatch
+*Feb  5 16:26:01.648: ISAKMP: (0):vendor ID is NAT-T v2
+*Feb  5 16:26:01.650: ISAKMP: (0):found peer pre-shared key matching 118.1.6.1
+*Feb  5 16:26:01.652: ISAKMP: (0):local preshared key found
+*Feb  5 16:26:01.654: ISAKMP: (0):Scanning profiles for xauth ... if-ipsec402-ikev1-isakmp-profile
+*Feb  5 16:26:01.657: ISAKMP: (0):Checking ISAKMP transform 1 against priority 402 policy
+*Feb  5 16:26:01.658: ISAKMP: (0):      encryption AES-CBC
+*Feb  5 16:26:01.660: ISAKMP: (0):      keylength of 256
+*Feb  5 16:26:01.661: ISAKMP: (0):      hash SHA
+*Feb  5 16:26:01.663: ISAKMP: (0):      default group 2
+*Feb  5 16:26:01.664: ISAKMP: (0):      auth pre-share
+*Feb  5 16:26:01.668: ISAKMP: (0):      life type in seconds
+*Feb  5 16:26:01.669: ISAKMP: (0):      life duration (basic) of 14400
+*Feb  5 16:26:01.670: ISAKMP: (0):atts are acceptable. Next payload is 3
+*Feb  5 16:26:01.671: ISAKMP: (0):Acceptable atts:actual life: 14400
+*Feb  5 16:26:01.673: ISAKMP: (0):Acceptable atts:life: 0
+*Feb  5 16:26:01.674: ISAKMP: (0):Basic life_in_seconds:14400
+*Feb  5 16:26:01.677: ISAKMP: (0):Returning Actual lifetime: 14400
+*Feb  5 16:26:01.677: ISAKMP: (0):Started lifetime timer: 14400.
+*Feb  5 16:26:03.008: ISAKMP: (0):processing vendor id payload
+*Feb  5 16:26:03.008: ISAKMP: (0):vendor ID seems Unity/DPD but major 69 mismatch
+*Feb  5 16:26:03.009: ISAKMP: (0):vendor ID is NAT-T RFC 3947
+*Feb  5 16:26:03.009: ISAKMP: (0):processing vendor id payload
+*Feb  5 16:26:03.009: ISAKMP: (0):vendor ID seems Unity/DPD but major 245 mismatch
+*Feb  5 16:26:03.010: ISAKMP: (0):vendor ID is NAT-T v7
+*Feb  5 16:26:03.010: ISAKMP: (0):processing vendor id payload
+*Feb  5 16:26:03.010: ISAKMP: (0):vendor ID seems Unity/DPD but major 157 mismatch
+*Feb  5 16:26:03.011: ISAKMP: (0):vendor ID is NAT-T v3
+*Feb  5 16:26:03.011: ISAKMP: (0):processing vendor id payload
+*Feb  5 16:26:03.011: ISAKMP: (0):vendor ID seems Unity/DPD but major 123 mismatch
+*Feb  5 16:26:03.012: ISAKMP: (0):vendor ID is NAT-T v2
+*Feb  5 16:26:03.012: ISAKMP: (0):Input = IKE_MESG_INTERNAL, IKE_PROCESS_MAIN_MODE
+*Feb  5 16:26:03.012: ISAKMP: (0):Old State = IKE_R_MM1  New State = IKE_R_MM1 
+
+*Feb  5 16:26:03.021: ISAKMP: (0):constructed NAT-T vendor-rfc3947 ID
+*Feb  5 16:26:03.021: ISAKMP-PAK: (0):sending packet to 118.1.6.1 my_port 500 peer_port 512 (R) MM_SA_SETUP
+*Feb  5 16:26:03.022: ISAKMP: (0):Sending an IKE IPv4 Packet.
+*Feb  5 16:26:03.023: ISAKMP: (0):Input = IKE_MESG_INTERNAL, IKE_PROCESS_COMPLETE
+*Feb  5 16:26:03.023: ISAKMP: (0):Old State = IKE_R_MM1  New State = IKE_R_MM2 
+
+*Feb  5 16:26:03.179: ISAKMP-PAK: (0):received packet from 118.1.6.1 dport 500 sport 512 Global (R) MM_SA_SETUP
+*Feb  5 16:26:03.179: ISAKMP: (0):Input = IKE_MESG_FROM_PEER, IKE_MM_EXCH
+*Feb  5 16:26:03.179: ISAKMP: (0):Old State = IKE_R_MM2  New State = IKE_R_MM3 
+*Feb  5 16:26:03.180: ISAKMP: (0):processing KE payload. message ID = 0
+*Feb  5 16:26:03.233: ISAKMP: (0):processing NONCE payload. message ID = 0
+*Feb  5 16:26:03.233: ISAKMP: (0):found peer pre-shared key matching 118.1.6.1
+*Feb  5 16:26:03.236: ISAKMP: (1001):processing vendor id payload
+*Feb  5 16:26:03.236: ISAKMP: (1001):vendor ID is DPD
+*Feb  5 16:26:03.236: ISAKMP: (1001):processing vendor id payload
+*Feb  5 16:26:03.237: ISAKMP: (1001):speaking to another IOS box!
+*Feb  5 16:26:03.237: ISAKMP: (1001):processing vendor id payload
+*Feb  5 16:26:03.237: ISAKMP: (1001):vendor ID seems Unity/DPD but major 253 mismatch
+*Feb  5 16:26:03.238: ISAKMP: (1001):vendor ID is XAUTH
+*Feb  5 16:26:03.238: ISAKMP: (1001):received payload type 20
+*Feb  5 16:26:03.239: ISAKMP: (1001):His hash no match - this node outside NAT
+*Feb  5 16:26:03.239: ISAKMP: (1001):received payload type 20
+*Feb  5 16:26:03.240: ISAKMP: (1001):His hash no match - this node outside NAT
+*Feb  5 16:26:03.240: ISAKMP: (1001):Input = IKE_MESG_INTERNAL, IKE_PROCESS_MAIN_MODE
+*Feb  5 16:26:03.240: ISAKMP: (1001):Old State = IKE_R_MM3  New State = IKE_R_MM3 
+
+*Feb  5 16:26:03.242: ISAKMP-PAK: (1001):sending packet to 118.1.6.1 my_port 500 peer_port 512 (R) MM_KEY_EXCH
+*Feb  5 16:26:03.242: ISAKMP: (1001):Sending an IKE IPv4 Packet.
+*Feb  5 16:26:03.244: ISAKMP: (1001):Input = IKE_MESG_INTERNAL, IKE_PROCESS_COMPLETE
+*Feb  5 16:26:03.244: ISAKMP: (1001):Old State = IKE_R_MM3  New State = IKE_R_MM4 
+
+*Feb  5 16:26:03.286: ISAKMP-PAK: (1001):received packet from 118.1.6.1 dport 4500 sport 5062 Global (R) MM_KEY_EXCH
+*Feb  5 16:26:03.288: ISAKMP: (1001):Input = IKE_MESG_FROM_PEER, IKE_MM_EXCH
+*Feb  5 16:26:03.289: ISAKMP: (1001):Old State = IKE_R_MM4  New State = IKE_R_MM5 
+
+*Feb  5 16:26:03.289: ISAKMP: (1001):processing ID payload. message ID = 0
+*Feb  5 16:26:03.290: ISAKMP: (1001):ID payload 
+next-payload : 8
+type         : 1
+*Feb  5 16:26:03.290: ISAKMP: (1001):address      : 192.168.61.42
+*Feb  5 16:26:03.290: ISAKMP: (1001):protocol     : 17 
+port         : 0 
+length       : 12
+*Feb  5 16:26:03.291: ISAKMP: (0):peer matches *none* of the profiles
+*Feb  5 16:26:03.291: ISAKMP: (1001):processing HASH payload. message ID = 0
+*Feb  5 16:26:03.292: ISAKMP: (1001):received payload type 17
+*Feb  5 16:26:03.295: ISAKMP: (1001):processing NOTIFY INITIAL_CONTACT protocol 1
+spi 0, message ID = 0, sa = 0x80007FAC47C46C90
+*Feb  5 16:26:03.296: ISAKMP: (1001):SA authentication status:
+authenticated
+*Feb  5 16:26:03.296: ISAKMP: (1001):SA has been authenticated with 118.1.6.1
+*Feb  5 16:26:03.296: ISAKMP: (1001):Detected port floating to port = 5062
+*Feb  5 16:26:03.297: ISAKMP: (1001):Trying to find existing peer 165.226.94.2/118.1.6.1/5062/
+*Feb  5 16:26:03.297: ISAKMP: (1001):SA authentication status:
+authenticated
+*Feb  5 16:26:03.298: ISAKMP: (1001):Process initial contact,
+bring down existing phase 1 and 2 SA's with local 165.226.94.2 remote 118.1.6.1 remote port 5062
+*Feb  5 16:26:03.298: ISAKMP: (0):Trying to insert a peer 165.226.94.2/118.1.6.1/5062/, 
+*Feb  5 16:26:03.298: ISAKMP: (0): and inserted successfully 80007FABD5969120.
+*Feb  5 16:26:03.301: ISAKMP: (1001):Input = IKE_MESG_INTERNAL, IKE_PROCESS_MAIN_MODE
+*Feb  5 16:26:03.301: ISAKMP: (1001):Old State = IKE_R_MM5  New State = IKE_R_MM5 
+
+*Feb  5 16:26:03.302: IPSEC(key_engine): got a queue event with 1 KMI message(s)
+*Feb  5 16:26:03.303: ISAKMP: (1001):SA is doing 
+*Feb  5 16:26:03.303: ISAKMP: (1001):pre-shared key authentication using id type ID_IPV4_ADDR
+*Feb  5 16:26:03.304: ISAKMP: (1001):ID payload 
+next-payloa[OK]
+ZSDC-2#d : 8
+type         : 1
+*Feb  5 16:26:03.304: ISAKMP: (1001):address      : 165.226.94.2
+*Feb  5 16:26:03.304: ISAKMP: (1001):protocol     : 17 
+port         : 0 
+length       : 12
+*Feb  5 16:26:03.305: ISAKMP: (1001):Total payload length: 12
+*Feb  5 16:26:03.305: ISAKMP-PAK: (1001):sending packet to 118.1.6.1 my_port 4500 peer_port 5062 (R) MM_KEY_EXCH
+*Feb  5 16:26:03.306: ISAKMP: (1001):Sending an IKE IPv4 Packet.
+*Feb  5 16:26:03.308: ISAKMP: (1001):Input = IKE_MESG_INTERNAL, IKE_PROCESS_COMPLETE
+*Feb  5 16:26:03.308: ISAKMP: (1001):Old State = IKE_R_MM5  New State = IKE_R_MM5 
+*Feb  5 16:26:03.310: ISAKMP: (1001):Input = IKE_MESG_INTERNAL, IKE_FETCH_USER_ATTR
+*Feb  5 16:26:03.310: ISAKMP: (1001):Old State = IKE_R_MM5  New State = IKE_P1_COMPLETE 
+
+*Feb  5 16:26:03.311: ISAKMP: (1001):Input = IKE_MESG_INTERNAL, IKE_PHASE1_COMPLETE
+*Feb  5 16:26:03.311: ISAKMP: (1001):Old State = IKE_P1_COMPLETE  New State = IKE_P1_COMPLETE 
+
+*Feb  5 16:26:03.353: ISAKMP-PAK: (1001):received packet from 118.1.6.1 dport 4500 sport 5062 Global (R) QM_IDLE      
+*Feb  5 16:26:03.353: ISAKMP: (1001):set new node 3998818849 to QM_IDLE      
+*Feb  5 16:26:03.354: ISAKMP: (1001):processing HASH payload. message ID = 3998818849
+*Feb  5 16:26:03.354: ISAKMP: (1001):processing SA payload. message ID = 3998818849
+*Feb  5 16:26:03.355: ISAKMP: (1001):Checking IPSec proposal 1
+*Feb  5 16:26:03.356: ISAKMP: (1001):transform 1, ESP_AES 
+*Feb  5 16:26:03.356: ISAKMP: (1001):   attributes in transform:
+*Feb  5 16:26:03.356: ISAKMP: (1001):      encaps is 3 (Tunnel-UDP)
+*Feb  5 16:26:03.357: ISAKMP: (1001):      SA life type in seconds
+*Feb  5 16:26:03.357: ISAKMP: (1001):      SA life duration (basic) of 14400
+*Feb  5 16:26:03.357: ISAKMP: (1001):      SA life type in kilobytes
+*Feb  5 16:26:03.358: ISAKMP:      SA life duration (VPI) of  0xFF 0xFF 0xFF 0xFF 
+*Feb  5 16:26:03.359: ISAKMP: (1001):      authenticator is HMAC-SHA
+*Feb  5 16:26:03.360: ISAKMP: (1001):      key length is 256
+*Feb  5 16:26:03.360: ISAKMP: (1001):      group is 2
+*Feb  5 16:26:03.360: ISAKMP: (1001):atts are acceptable.
+*Feb  5 16:26:03.361: IPSEC(validate_proposal_request): proposal part #1
+*Feb  5 16:26:03.361: IPSEC(validate_proposal_request): proposal part #1,
+  (key eng. msg.) INBOUND local= 165.226.94.2:0, remote= 118.1.6.1:0,
+    local_proxy= 0.0.0.0/0.0.0.0/256/0,
+    remote_proxy= 0.0.0.0/0.0.0.0/256/0,
+    protocol= ESP, transform= esp-aes 256 esp-sha-hmac  (Tunnel-UDP), esn= FALSE,
+    lifedur= 0s and 0kb, 
+    spi= 0x0(0), conn_id= 0, keysize= 256, flags= 0x0
+*Feb  5 16:26:03.364: map_db_check_isakmp_profile profile did not match,
+ike passed profile : NULL,
+map_ike_profile: if-ipsec402-ikev1-isakmp-profile,
+head_ike_profile: if-ipsec402-ikev1-isakmp-profile
+*Feb  5 16:26:03.364: Crypto mapdb : proxy_match
+src addr     : 0.0.0.0
+dst addr     : 0.0.0.0
+protocol     : 0
+src port     : 0
+dst port     : 0
+*Feb  5 16:26:03.365: map_db_check_isakmp_profile profile did not match,
+ike passed profile : NULL,
+map_ike_profile: if-ipsec402-ikev1-isakmp-profile,
+head_ike_profile: if-ipsec402-ikev1-isakmp-profile
+*Feb  5 16:26:03.365: Crypto mapdb : proxy_match
+src addr     : 0.0.0.0
+dst addr     : 0.0.0.0
+protocol     : 0
+src port     : 0
+dst port     : 0
+*Feb  5 16:26:03.366: map_db_check_isakmp_profile profile did not match,
+ike passed profile : NULL,
+map_ike_profile: if-ipsec402-ikev1-isakmp-profile,
+head_ike_profile: if-ipsec402-ikev1-isakmp-profile
+*Feb  5 16:26:03.366: map_db_find_best did not find matching map
+*Feb  5 16:26:03.367: map_db_check_isakmp_profile profile did not match,
+ike passed profile : NULL,
+map_ike_profile: if-ipsec402-ikev1-isakmp-profile,
+head_ike_profile: if-ipsec402-ikev1-isakmp-profile
+*Feb  5 16:26:03.367: Crypto mapdb : proxy_match
+src addr     : 0.0.0.0
+dst addr     : 0.0.0.0
+protocol     : 0
+src port     : 0
+dst port     : 0
+*Feb  5 16:26:03.367: map_db_check_isakmp_profile profile did not match,
+ike passed profile : NULL,
+map_ike_profile: if-ipsec402-ikev1-isakmp-profile,
+head_ike_profile: if-ipsec402-ikev1-isakmp-profile
+*Feb  5 16:26:03.367: Crypto mapdb : proxy_match
+src addr     : 0.0.0.0
+dst addr     : 0.0.0.0
+protocol     : 0
+src port     : 0
+dst port     : 0
+*Feb  5 16:26:03.368: map_db_check_isakmp_profile profile did not match,
+ike passed profile : NULL,
+map_ike_profile: if-ipsec402-ikev1-isakmp-profile,
+head_ike_profile: if-ipsec402-ikev1-isakmp-profile
+*Feb  5 16:26:03.368: map_db_find_best did not find matching map
+*Feb  5 16:26:03.369: ISAKMP-ERROR: (1001):IPSec policy invalidated proposal with error 32
+*Feb  5 16:26:03.372: ISAKMP-ERROR: (1001):phase 2 SA policy not acceptable! (local 165.226.94.2 remote 118.1.6.1)
+*Feb  5 16:26:03.372: ISAKMP: (1001):set new node 505086331 to QM_IDLE      
+*Feb  5 16:26:03.372: ISAKMP: (1001):Sending NOTIFY PROPOSAL_NOT_CHOSEN protocol 3
+spi 9223512414822511288, message ID = 505086331
+*Feb  5 16:26:03.373: ISAKMP-PAK: (1001):sending packet to 118.1.6.1 my_port 4500 peer_port 5062 (R) QM_IDLE      
+*Feb  5 16:26:03.373: ISAKMP: (1001):Sending an IKE IPv4 Packet.
+*Feb  5 16:26:03.375: ISAKMP: (1001):purging node 505086331
+*Feb  5 16:26:03.381: ISAKMP-ERROR: (1001):deleting node 3998818849 error TRUE reason "QM rejected"
+*Feb  5 16:26:03.385: ISAKMP: (1001):Node 3998818849, Input = IKE_MESG_FROM_PEER, IKE_QM_EXCH
+*Feb  5 16:26:03.385: ISAKMP: (1001):Old State = IKE_QM_READY  New State = IKE_QM_READY
+*Feb  5 16:26:11.832: ISAKMP-PAK: (1001):received packet from 118.1.6.1 dport 4500 sport 5062 Global (R) QM_IDLE      
+*Feb  5 16:26:11.842: ISAKMP: (1001):set new node 265943874 to QM_IDLE      
+*Feb  5 16:26:11.853: ISAKMP: (1001):processing HASH payload. message ID = 265943874
+*Feb  5 16:26:11.855: ISAKMP: (1001):processing SA payload. message ID = 265943874
+*Feb  5 16:26:11.859: ISAKMP: (1001):Checking IPSec proposal 1
+*Feb  5 16:26:11.864: ISAKMP: (1001):transform 1, ESP_AES 
+*Feb  5 16:26:11.868: ISAKMP: (1001):   attributes in transform:
+*Feb  5 16:26:11.872: ISAKMP: (1001):      encaps is 3 (Tunnel-UDP)
+*Feb  5 16:26:11.876: ISAKMP: (1001):      SA life type in seconds
+*Feb  5 16:26:11.880: ISAKMP: (1001):      SA life duration (basic) of 14400
+*Feb  5 16:26:11.884: ISAKMP: (1001):      SA life type in kilobytes
+*Feb  5 16:26:11.889: ISAKMP:      SA life duration (VPI) of  0xFF 0xFF 0xFF 0xFF 
+*Feb  5 16:26:11.914: ISAKMP: (1001):      authenticator is HMAC-SHA
+*Feb  5 16:26:11.919: ISAKMP: (1001):      key length is 256
+*Feb  5 16:26:11.923: ISAKMP: (1001):      group is 2
+*Feb  5 16:26:11.929: ISAKMP: (1001):atts are acceptable.
+*Feb  5 16:26:11.932: IPSEC(validate_proposal_request): proposal part #1
+*Feb  5 16:26:11.937: IPSEC(validate_proposal_request): proposal part #1,
+  (key eng. msg.) INBOUND local= 165.226.94.2:0, remote= 118.1.6.1:0,
+    local_proxy= 0.0.0.0/0.0.0.0/256/0,
+    remote_proxy= 0.0.0.0/0.0.0.0/256/0,
+    protocol= ESP, transform= esp-aes 256 esp-sha-hmac  (Tunnel-UDP), esn= FALSE,
+    lifedur= 0s and 0kb, 
+    spi= 0x0(0), conn_id= 0, keysize= 256, flags= 0x0
+*Feb  5 16:26:11.959: map_db_check_isakmp_profile profile did not match,
+ike passed profile : NULL,
+map_ike_profile: if-ipsec402-ikev1-isakmp-profile,
+head_ike_profile: if-ipsec402-ikev1-isakmp-profile
+*Feb  5 16:26:11.962: Crypto mapdb : proxy_match
+src addr     : 0.0.0.0
+dst addr     : 0.0.0.0
+protocol     : 0
+src port     : 0
+dst port     : 0
+*Feb  5 16:26:11.966: map_db_check_isakmp_profile profile did not match,
+ike passed profile : NULL,
+map_ike_profile: if-ipsec402-ikev1-isakmp-profile,
+head_ike_profile: if-ipsec402-ikev1-isakmp-profile
+*Feb  5 16:26:11.970: Crypto mapdb : proxy_match
+src addr     : 0.0.0.0
+dst addr     : 0.0.0.0
+protocol     : 0
+src port     : 0
+dst port     : 0
+*Feb  5 16:26:11.974: map_db_check_isakmp_profile profile did not match,
+ike passed profile : NULL,
+map_ike_profile: if-ipsec402-ikev1-isakmp-profile,
+head_ike_profile: if-ipsec402-ikev1-isakmp-profile
+*Feb  5 16:26:11.978: map_db_find_best did not find matching map
+*Feb  5 16:26:11.982: map_db_check_isakmp_profile profile did not match,
+ike passed profile : NULL,
+map_ike_profile: if-ipsec402-ikev1-isakmp-profile,
+head_ike_profile: if-ipsec402-ikev1-isakmp-profile
+*Feb  5 16:26:11.986: Crypto mapdb : proxy_match
+src addr     : 0.0.0.0
+dst addr     : 0.0.0.0
+protocol     : 0
+src port     : 0
+dst port     : 0
+*Feb  5 16:26:11.991: map_db_check_isakmp_profile profile did not match,
+ike passed profile : NULL,
+map_ike_profile: if-ipsec402-ikev1-isakmp-profile,
+head_ike_profile: if-ipsec402-ikev1-isakmp-profile
+*Feb  5 16:26:11.996: Crypto mapdb : proxy_match
+src addr     : 0.0.0.0
+dst addr     : 0.0.0.0
+protocol     : 0
+src port     : 0
+dst port     : 0
+*Feb  5 16:26:12.000: map_db_check_isakmp_profile profile did not match,
+ike passed profile : NULL,
+map_ike_profile: if-ipsec402-ikev1-isakmp-profile,
+head_ike_profile: if-ipsec402-ikev1-isakmp-profile
+*Feb  5 16:26:12.003: map_db_find_best did not find matching map
+*Feb  5 16:26:12.012: ISAKMP-ERROR: (1001):IPSec policy invalidated proposal with error 32
+*Feb  5 16:26:12.055: ISAKMP-ERROR: (1001):phase 2 SA policy not acceptable! (local 165.226.94.2 remote 118.1.6.1)
+*Feb  5 16:26:12.064: ISAKMP: (1001):set new node 1245096257 to QM_IDLE      
+*Feb  5 16:26:12.071: ISAKMP: (1001):Sending NOTIFY PROPOSAL_NOT_CHOSEN protocol 3
+spi 9223512414822511288, message ID = 1245096257
+*Feb  5 16:26:12.075: ISAKMP-PAK: (1001):sending packet to 118.1.6.1 my_port 4500 peer_port 5062 (R) QM_IDLE      
+*Feb  5 16:26:12.080: ISAKMP: (1001):Sending an IKE IPv4 Packet.
+*Feb  5 16:26:12.090: ISAKMP: (1001):purging node 1245096257
+*Feb  5 16:26:12.096: ISAKMP-ERROR: (1001):deleting node 265943874 error TRUE reason "QM rejected"
+*Feb  5 16:26:12.117: ISAKMP: (1001):Node 265943874, Input = IKE_MESG_FROM_PEER, IKE_QM_EXCH
+*Feb  5 16:26:12.120: ISAKMP: (1001):Old State = IKE_QM_READY  New State = IKE_QM_READY
+*Feb  5 16:26:29.224: IPSEC:(SESSION ID = 1) (key_engine) request timer fired: count = 1,
+  (identity) local= 165.226.94.2:0, remote= 118.1.6.1:0,
+    local_proxy= 0.0.0.0/0.0.0.0/256/0,
+    remote_proxy= 0.0.0.0/0.0.0.0/256/0
+*Feb  5 16:26:29.237: IPSEC(sa_request): ,
+  (key eng. msg.) OUTBOUND local= 165.226.94.2:500, remote= 118.1.6.1:500,
+    local_proxy= 0.0.0.0/0.0.0.0/256/0,
+    remote_proxy= 0.0.0.0/0.0.0.0/256/0,
+    protocol= ESP, transform= esp-aes 256 esp-sha-hmac  (Tunnel), esn= FALSE,
+    lifedur= 14400s and 4294967295kb, 
+    spi= 0x0(0), conn_id= 0, keysize= 256, flags= 0x0
+*Feb  5 16:26:29.454: ISAKMP: (1001):set new node 0 to QM_IDLE      
+*Feb  5 16:26:29.460: ISAKMP: (1001):SA has outstanding requests  (local 165.226.94.2 port 4500, remote 118.1.6.1 port 5062)
+*Feb  5 16:26:29.466: ISAKMP: (1001):sitting IDLE. Starting QM immediately (QM_IDLE      )
+*Feb  5 16:26:29.470: ISAKMP: (1001):beginning Quick Mode exchange, M-ID of 1271827992
+*Feb  5 16:26:29.681: ISAKMP: (1001):QM Initiator gets spi
+*Feb  5 16:26:29.689: ISAKMP-PAK: (1001):sending packet to 118.1.6.1 my_port 4500 peer_port 5062 (R) QM_IDLE      
+*Feb  5 16:26:29.689: ISAKMP: (1001):Sending an IKE IPv4 Packet.
+*Feb  5 16:26:29.694: ISAKMP: (1001):Node 1271827992, Input = IKE_MESG_INTERNAL, IKE_INIT_QM
+*Feb  5 16:26:29.694: ISAKMP: (1001):Old State = IKE_QM_READY  New State = IKE_QM_I_QM1
+*Feb  5 16:26:29.798: ISAKMP-PAK: (1001):received packet from 118.1.6.1 dport 4500 sport 5062 Global (R) QM_IDLE      
+*Feb  5 16:26:29.800: ISAKMP: (1001):processing HASH payload. message ID = 1271827992
+*Feb  5 16:26:29.801: ISAKMP: (1001):processing SA payload. message ID = 1271827992
+*Feb  5 16:26:29.801: ISAKMP: (1001):Checking IPSec proposal 1
+*Feb  5 16:26:29.802: ISAKMP: (1001):transform 1, ESP_AES 
+*Feb  5 16:26:29.803: ISAKMP: (1001):   attributes in transform:
+*Feb  5 16:26:29.804: ISAKMP: (1001):      encaps is 3 (Tunnel-UDP)
+*Feb  5 16:26:29.805: ISAKMP: (1001):      SA life type in seconds
+*Feb  5 16:26:29.805: ISAKMP: (1001):      SA life duration (basic) of 14400
+*Feb  5 16:26:29.806: ISAKMP: (1001):      SA life type in kilobytes
+*Feb  5 16:26:29.807: ISAKMP:      SA life duration (VPI) of  0xFF 0xFF 0xFF 0xFF 
+*Feb  5 16:26:29.810: ISAKMP: (1001):      authenticator is HMAC-SHA
+*Feb  5 16:26:29.810: ISAKMP: (1001):      key length is 256
+*Feb  5 16:26:29.811: ISAKMP: (1001):      group is 2
+*Feb  5 16:26:29.811: ISAKMP: (1001):atts are acceptable.
+*Feb  5 16:26:29.812: IPSEC(validate_proposal_request): proposal part #1
+*Feb  5 16:26:29.812: IPSEC(validate_proposal_request): proposal part #1,
+  (key eng. msg.) INBOUND local= 165.226.94.2:0, remote= 118.1.6.1:0,
+    local_proxy= 0.0.0.0/0.0.0.0/256/0,
+    remote_proxy= 0.0.0.0/0.0.0.0/256/0,
+    protocol= ESP, transform= esp-aes 256 esp-sha-hmac  (Tunnel-UDP), esn= FALSE,
+    lifedur= 0s and 0kb, 
+    spi= 0x0(0), conn_id= 0, keysize= 256, flags= 0x0
+*Feb  5 16:26:29.815: map_db_check_isakmp_profile profile did not match,
+ike passed profile : NULL,
+map_ike_profile: if-ipsec402-ikev1-isakmp-profile,
+head_ike_profile: if-ipsec402-ikev1-isakmp-profile
+*Feb  5 16:26:29.815: Crypto mapdb : proxy_match
+src addr     : 0.0.0.0
+dst addr     : 0.0.0.0
+protocol     : 0
+src port     : 0
+dst port     : 0
+*Feb  5 16:26:29.816: map_db_check_isakmp_profile profile did not match,
+ike passed profile : NULL,
+map_ike_profile: if-ipsec402-ikev1-isakmp-profile,
+head_ike_profile: if-ipsec402-ikev1-isakmp-profile
+*Feb  5 16:26:29.816: Crypto mapdb : proxy_match
+src addr     : 0.0.0.0
+dst addr     : 0.0.0.0
+protocol     : 0
+src port     : 0
+dst port     : 0
+*Feb  5 16:26:29.817: map_db_check_isakmp_profile profile did not match,
+ike passed profile : NULL,
+map_ike_profile: if-ipsec402-ikev1-isakmp-profile,
+head_ike_profile: if-ipsec402-ikev1-isakmp-profile
+*Feb  5 16:26:29.817: map_db_find_best did not find matching map
+*Feb  5 16:26:29.818: map_db_check_isakmp_profile profile did not match,
+ike passed profile : NULL,
+map_ike_profile: if-ipsec402-ikev1-isakmp-profile,
+head_ike_profile: if-ipsec402-ikev1-isakmp-profile
+*Feb  5 16:26:29.818: Crypto mapdb : proxy_match
+src addr     : 0.0.0.0
+dst addr     : 0.0.0.0
+protocol     : 0
+src port     : 0
+dst port     : 0
+*Feb  5 16:26:29.819: map_db_check_isakmp_profile profile did not match,
+ike passed profile : NULL,
+map_ike_profile: if-ipsec402-ikev1-isakmp-profile,
+head_ike_profile: if-ipsec402-ikev1-isakmp-profile
+*Feb  5 16:26:29.820: Crypto mapdb : proxy_match
+src addr     : 0.0.0.0
+dst addr     : 0.0.0.0
+protocol     : 0
+src port     : 0
+dst port     : 0
+*Feb  5 16:26:29.820: map_db_check_isakmp_profile profile did not match,
+ike passed profile : NULL,
+map_ike_profile: if-ipsec402-ikev1-isakmp-profile,
+head_ike_profile: if-ipsec402-ikev1-isakmp-profile
+*Feb  5 16:26:29.821: map_db_find_best did not find matching map
+*Feb  5 16:26:29.821: ISAKMP-ERROR: (1001):IPSec policy invalidated proposal with error 32
+*Feb  5 16:26:29.828: ISAKMP-ERROR: (1001):phase 2 SA policy not acceptable! (local 165.226.94.2 remote 118.1.6.1)
+*Feb  5 16:26:29.829: ISAKMP: (1001):set new node 1096685674 to QM_IDLE      
+*Feb  5 16:26:29.829: ISAKMP: (1001):Sending NOTIFY PROPOSAL_NOT_CHOSEN protocol 3
+spi 9223512414822511416, message ID = 1096685674
+*Feb  5 16:26:29.830: ISAKMP-PAK: (1001):sending packet to 118.1.6.1 my_port 4500 peer_port 5062 (R) QM_IDLE      
+*Feb  5 16:26:29.831: ISAKMP: (1001):Sending an IKE IPv4 Packet.
+*Feb  5 16:26:29.833: ISAKMP: (1001):purging node 1096685674
+*Feb  5 16:26:29.834: ISAKMP-ERROR: (1001):deleting node 1271827992 error TRUE reason "QM rejected"
+*Feb  5 16:26:29.837: ISAKMP: (1001):Node 1271827992, Input = IKE_MESG_FROM_PEER, IKE_QM_EXCH
+*Feb  5 16:26:29.838: ISAKMP: (1001):Old State = IKE_QM_I_QM1  New State = IKE_QM_I_QM1
+ZSDC-2#
+ZSDC-2#
+ZSDC-2#undebu
+*Feb  5 16:26:42.668: ISAKMP-PAK: (1001):received packet from 118.1.6.1 dport 4500 sport 5062 Global (R) QM_IDLE      
+*Feb  5 16:26:42.669: ISAKMP: (1001):set new node 2846996363 to QM_IDLE      
+*Feb  5 16:26:42.672: ISAKMP: (1001):processing HASH payload. message ID = 2846996363
+*Feb  5 16:26:42.673: ISAKMP: (1001):processing SA payload. message ID = 2846996363
+*Feb  5 16:26:42.675: ISAKMP: (1001):Checking IPSec proposal 1
+*Feb  5 16:26:42.676: ISAKMP: (1001):transform 1, ESP_AES 
+*Feb  5 16:26:42.678: ISAKMP: (1001):   attributes in transform:
+*Feb  5 16:26:42.679: ISAKMP: (1001):      encaps is 3 (Tunnel-UDP)
+*Feb  5 16:26:42.680: ISAKMP: (1001):      SA life type in seconds
+*Feb  5 16:26:42.682: ISAKMP: (1001):      SA life duration (basic) of 14400
+*Feb  5 16:26:42.683: ISAKMP: (1001):      SA life type in kilobytes
+*Feb  5 16:26:42.684: ISAKMP:      SA life duration (VPI) of  0xFF 0xFF 0xFF 0xFF 
+*Feb  5 16:26:42.689: ISAKMP: (1001):      authenticator is HMAC-SHA
+*Feb  5 16:26:42.691: ISAKMP: (1001):      key length is 256
+*Feb  5 16:26:42.692: ISAKMP: (1001):      group is 2
+*Feb  5 16:26:42.693: ISAKMP: (1001):atts are acceptable.
+*Feb  5 16:26:42.694: IPSEC(validate_proposal_request): proposal part #1
+*Feb  5 16:26:42.695: IPSEC(validate_proposal_request): proposal part #1,
+  (key eng. msg.) INBOUND local= 165.226.94.2:0, remote= 118.1.6.1:0,
+    local_proxy= 0.0.0.0/0.0.0.0/256/0,
+    remote_proxy= 0.0.0.0/0.0.0.0/256/0,
+    protocol= ESP, transform= esp-aes 256 esp-sha-hmac  (Tunnel-UDP), esn= FALSE,
+    lifedur= 0s and 0kb, 
+    spi= 0x0(0), conn_id= 0, keysize= 256, flags= 0x0
+*Feb  5 16:26:42.700: map_db_check_isakmp_profile profile did not match,
+ike passed profile : NULL,
+map_ike_profile: if-ipsec402-ikev1-isakmp-profile,
+head_ike_profile: if-ipsec402-ikev1-isakmp-profile
+*Feb  5 16:26:42.701: Crypto mapdb : proxy_match
+src addr     : 0.0.0.0
+dst addr     : 0.0.0.0
+protocol     : 0
+src port     : 0
+dst port     : 0
+*Feb  5 16:26:42.702: map_db_check_isakmp_profile profile did not match,
+ike passed profile : NULL,
+map_ike_profile: if-ipsec402-ikev1-isakmp-profile,
+head_ike_profile: if-ipsec402-ikev1-isakmp-profile
+*Feb  5 16:26:42.703: Crypto mapdb : proxy_match
+src addr     : 0.0.0.0
+dst addr     : 0.0.0.0
+protocol     : 0
+src port     : 0
+dst port     : 0
+*Feb  5 16:26:42.704: map_db_check_isakmp_profile profile did not match,
+ike passed profile : NULL,
+map_ike_profile: if-ipsec402-ikev1-isakmp-profile,
+head_ike_profile: if-ipsec402-ikev1-isakmp-profile
+*Feb  5 16:26:42.705: map_db_find_best did not find matching map
+*Feb  5 16:26:42.706: map_db_check_isakmp_profile profile did not match,
+ike passed profile : NULL,
+map_ike_profile: if-ipsec402-ikev1-isakmp-profile,
+head_ike_profile: if-ipsec402-ikev1-isakmp-profile
+*Feb  5 16:26:42.707: Crypto mapdb : proxy_match
+src addr     : 0.0.0.0
+dst addr     : 0.0.0.0
+protocol     : 0
+src port     : 0
+dst port     : 0
+*Feb  5 16:26:42.708: map_db_check_isakmp_profile profile did not match,
+ike passed profile : NULL,
+map_ike_profile: if-ipsec402-ikev1-isakmp-profile,
+head_ike_profile: if-ipsec402-ikev1-isakmp-profile
+*Feb  5 16:26:42.709: Crypto mapdb : proxy_match
+src addr     : 0.0.0.0
+dst addr     : 0.0.0.0
+protocol     : 0
+src port     : 0
+dst port     : 0
+*Feb  5 16:26:42.710: map_db_check_isakmp_profile profile did not match,
+ike passed profile : NULL,
+map_ike_profile: if-ipsec402-ikev1-isakmp-profile,
+head_ike_profile: if-ipsec402-ikev1-isakmp-profile
+*Feb  5 16:26:42.711: map_db_find_best did not find matching map
+*Feb  5 16:26:42.712: ISAKMP-ERROR: (1001):IPSec policy invalidated proposal with error 32
+*Feb  5 16:26:42.724: ISAKMP-ERROR: (1001):phase 2 SA policy not acceptable! (local 165.226.94.2 remote 118.1.6.1)
+*Feb  5 16:26:42.725: ISAKMP: (1001):set new node 813344184 to QM_IDLE      
+*Feb  5 16:26:42.727: ISAKMP: (1001):Sending NOTIFY PROPOSAL_NOT_CHOSEN protocol 3
+spi 9223512414822511288, message ID = 813344184
+*Feb  5 16:26:42.728: ISAKMP-PAK:g all
+ (1001):sending packet to 118.1.6.1 my_port 4500 peer_port 5062 (R) QM_IDLE      
+*Feb  5 16:26:42.729: ISAKMP: (1001):Sending an IKE IPv4 Packet.
+*Feb  5 16:26:42.733: ISAKMP: (1001):purging node 813344184
+*Feb  5 16:26:42.735: ISAKMP-ERROR: (1001):deleting node 2846996363 error TRUE reason "QM rejected"
+*Feb  5 16:26:42.742: ISAKMP: (1001):Node 2846996363, Input = IKE_MESG_FROM_PEER, IKE_QM_EXCH
+*Feb  5 16:26:42.743: ISAKMP: (1001):Old State = IKE_QM_READY  New State = IKE_QM_READY

@@ -1,0 +1,298 @@
+!
+! Last configuration change at 14:44:20 UTC Mon Mar 31 2025
+!
+version 17.3
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service call-home
+platform qfp utilization monitor load 80
+platform punt-keepalive disable-kernel-core
+platform console serial
+!
+hostname ZSDC-1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+login on-success log
+!
+!
+!
+!
+!
+!
+!
+subscriber templating
+! 
+! 
+! 
+! 
+!
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+crypto pki trustpoint TP-self-signed-1413192656
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-1413192656
+ revocation-check none
+ rsakeypair TP-self-signed-1413192656
+!
+crypto pki trustpoint SLA-TrustPoint
+ enrollment pkcs12
+ revocation-check crl
+!
+!
+crypto pki certificate chain TP-self-signed-1413192656
+ certificate self-signed 01
+  30820330 30820218 A0030201 02020101 300D0609 2A864886 F70D0101 05050030 
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 31343133 31393236 3536301E 170D3235 30313238 31373536 
+  35305A17 0D333530 31323831 37353635 305A3031 312F302D 06035504 03132649 
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D31 34313331 
+  39323635 36308201 22300D06 092A8648 86F70D01 01010500 0382010F 00308201 
+  0A028201 0100EE8E 8DBF2701 9E47ECFF 0BE4EAD8 E20A5A6E 7CA45EF3 D32852B3 
+  4207B54E 4F784598 9FCDBAAF 89BE755B 7BED22E1 A76563D2 1FD85E0A 24D059FE 
+  4D065810 4D3397CC 0F20AD39 B694CB1A 915AF4A4 81645CE1 83154757 CFC31C1B 
+  D25D90BD 7E98ACD7 6BB7D0E1 100BEA7E 37F6256C 228D3C13 93337391 4398048F 
+  41BD3AF1 53734897 EA37EE3B 44410089 8A0637FB 5076ABB2 20238500 07B5A02B 
+  03EAFA86 0EBC78BE 67D4BA11 DF790448 F91BD8DE 58FC1260 BDBCBF60 41E3D3D8 
+  5EF9CA8E 8DFB3669 1467AE7C 90E6A55A 5A0FCBB2 BC7CD338 71FB5F4F 012CD040 
+  995C63B7 27DB46C9 69EFF43D AB3F5D4C 94C14CC3 B85CC86A 957C7A19 C3AB879F 
+  F3435DCF B37B0203 010001A3 53305130 0F060355 1D130101 FF040530 030101FF 
+  301F0603 551D2304 18301680 1466AAD5 09BF84AF BDE96000 F02AA9D5 6D57AF20 
+  6A301D06 03551D0E 04160414 66AAD509 BF84AFBD E96000F0 2AA9D56D 57AF206A 
+  300D0609 2A864886 F70D0101 05050003 82010100 1763A610 770F4C2C 9A3B50A6 
+  7CF063E9 45A054E9 5211EF89 6DC5B16B 69186651 CA5EB51D 96132AAD D179376D 
+  A7572E8D 2B07FC19 84CE9E9A B194DD40 88EB1D19 3DA9F45F 23B0A681 7F684E06 
+  91CF7565 5E718E1C 679C2F73 700EEA7E 458474BB B53B3856 74B320A6 A97D02EA 
+  B473358B A63E89D4 5D0785BC 87DDF23D 9D63E744 32B2C1EA 8EE33D47 60559DD4 
+  80DA5F47 DF6F06A4 3D9AC446 CF66FD01 125941E3 C66179F3 B9037CB7 3EA45B38 
+  1A0EAE0C 0E78E950 FB42DAE4 0F03F3B7 1164595A CAE328BB D8448A55 43B47636 
+  0D7019CF 6359C772 8F7DBF9A 33FA5222 28CF954A 0B458393 A4AFAAAD 17AD1FD0 
+  17C000E6 7E8D19F0 2FD57895 7B978901 8331B4C3
+  quit
+crypto pki certificate chain SLA-TrustPoint
+ certificate ca 01
+  30820321 30820209 A0030201 02020101 300D0609 2A864886 F70D0101 0B050030 
+  32310E30 0C060355 040A1305 43697363 6F312030 1E060355 04031317 43697363 
+  6F204C69 63656E73 696E6720 526F6F74 20434130 1E170D31 33303533 30313934 
+  3834375A 170D3338 30353330 31393438 34375A30 32310E30 0C060355 040A1305 
+  43697363 6F312030 1E060355 04031317 43697363 6F204C69 63656E73 696E6720 
+  526F6F74 20434130 82012230 0D06092A 864886F7 0D010101 05000382 010F0030 
+  82010A02 82010100 A6BCBD96 131E05F7 145EA72C 2CD686E6 17222EA1 F1EFF64D 
+  CBB4C798 212AA147 C655D8D7 9471380D 8711441E 1AAF071A 9CAE6388 8A38E520 
+  1C394D78 462EF239 C659F715 B98C0A59 5BBB5CBD 0CFEBEA3 700A8BF7 D8F256EE 
+  4AA4E80D DB6FD1C9 60B1FD18 FFC69C96 6FA68957 A2617DE7 104FDC5F EA2956AC 
+  7390A3EB 2B5436AD C847A2C5 DAB553EB 69A9A535 58E9F3E3 C0BD23CF 58BD7188 
+  68E69491 20F320E7 948E71D7 AE3BCC84 F10684C7 4BC8E00F 539BA42B 42C68BB7 
+  C7479096 B4CB2D62 EA2F505D C7B062A4 6811D95B E8250FC4 5D5D5FB8 8F27D191 
+  C55F0D76 61F9A4CD 3D992327 A8BB03BD 4E6D7069 7CBADF8B DF5F4368 95135E44 
+  DFC7C6CF 04DD7FD1 02030100 01A34230 40300E06 03551D0F 0101FF04 04030201 
+  06300F06 03551D13 0101FF04 05300301 01FF301D 0603551D 0E041604 1449DC85 
+  4B3D31E5 1B3E6A17 606AF333 3D3B4C73 E8300D06 092A8648 86F70D01 010B0500 
+  03820101 00507F24 D3932A66 86025D9F E838AE5C 6D4DF6B0 49631C78 240DA905 
+  604EDCDE FF4FED2B 77FC460E CD636FDB DD44681E 3A5673AB 9093D3B1 6C9E3D8B 
+  D98987BF E40CBD9E 1AECA0C2 2189BB5C 8FA85686 CD98B646 5575B146 8DFC66A8 
+  467A3DF4 4D565700 6ADF0F0D CF835015 3C04FF7C 21E878AC 11BA9CD2 55A9232C 
+  7CA7B7E6 C1AF74F6 152E99B7 B1FCF9BB E973DE7F 5BDDEB86 C71E3B49 1765308B 
+  5FB0DA06 B92AFE7F 494E8A9E 07B85737 F3A58BE1 1A48A229 C37C1E69 39F08678 
+  80DDCD16 D6BACECA EEBC7CF9 8428787B 35202CDC 60E4616A B623CDBD 230E3AFB 
+  418616A9 4093E049 4D10AB75 27E86F73 932E35B5 8862FDAE 0275156F 719BB2F0 
+  D697DF7F 28
+  quit
+!
+license udi pid CSR1000V sn 9CFWT7UN5QS
+diagnostic bootup level minimal
+memory free low-watermark processor 71497
+!
+!
+spanning-tree extend system-id
+!
+!
+redundancy
+!
+!
+!
+!
+!
+!
+!
+! 
+crypto keyring if-ipsec401-ikev1-keyring  
+  pre-shared-key address 118.1.6.1 key Liverpool1$
+!
+!
+!
+!
+!
+!
+!
+crypto isakmp policy 401
+ encryption aes 256
+ authentication pre-share
+ group 2
+ lifetime 14400
+crypto isakmp keepalive 10 3
+crypto isakmp profile if-ipsec401-ikev1-isakmp-profile
+   keyring if-ipsec401-ikev1-keyring
+   match identity address 118.1.6.1 255.255.255.255 
+   local-address 136.226.94.2
+!
+!
+crypto ipsec transform-set MYTS esp-aes 256 esp-sha256-hmac 
+ mode tunnel
+crypto ipsec transform-set if-ipsec401-ikev1-transform esp-aes 256 esp-sha256-hmac 
+ mode tunnel
+!
+!
+crypto ipsec profile if-ipsec401-ipsec-profile
+ set security-association lifetime kilobytes disable
+ set security-association lifetime seconds 14400
+ set security-association replay window-size 512 
+ set transform-set if-ipsec401-ikev1-transform 
+ set pfs group2
+!
+!
+!
+!
+!
+! 
+! 
+!
+!
+interface Tunnel100401
+ no shutdown
+ description ACTIVE-TUN-CENY
+ ip address 192.168.61.198 255.255.255.252
+ ip mtu 1400
+ ip tcp adjust-mss 1360
+ tunnel source GigabitEthernet2
+ tunnel mode ipsec ipv4
+ tunnel destination 118.1.6.1
+ tunnel path-mtu-discovery
+ tunnel protection ipsec profile if-ipsec401-ipsec-profile
+!
+interface GigabitEthernet1
+ no shutdown
+ description DFW-INET
+ ip address 12.61.1.1 255.255.255.248
+ negotiation auto
+ no mop enabled
+ no mop sysid
+!
+interface GigabitEthernet2
+ no shutdown
+ ip address 136.226.94.2 255.255.255.248
+ ip access-group CRYPTO_ACL in
+ ip access-group CRYPTO_ACL out
+ negotiation auto
+ no mop enabled
+ no mop sysid
+!
+interface GigabitEthernet3
+ no shutdown
+ no ip address
+ shutdown
+ negotiation auto
+ no mop enabled
+ no mop sysid
+!
+interface GigabitEthernet4
+ no shutdown
+ no ip address
+ shutdown
+ negotiation auto
+ no mop enabled
+ no mop sysid
+!
+interface GigabitEthernet5
+ no shutdown
+ no ip address
+ shutdown
+ negotiation auto
+ no mop enabled
+ no mop sysid
+!
+interface GigabitEthernet6
+ no shutdown
+ no ip address
+ shutdown
+ negotiation auto
+ no mop enabled
+ no mop sysid
+!
+router bgp 64000
+ bgp log-neighbor-changes
+ neighbor 12.61.1.2 remote-as 65000
+!
+ip forward-protocol nd
+ip http server
+ip http authentication local
+ip http secure-server
+!
+ip route 11.61.1.0 255.255.255.248 Tunnel100401
+ip route 118.1.6.0 255.255.255.0 136.226.94.1
+!
+ip access-list extended CRYPTO_ACL
+ 10 permit ip any any
+ 20 permit tcp any any
+ 30 permit udp any any
+!
+!
+!
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+line con 0
+ stopbits 1
+line vty 0 4
+ login
+ transport input ssh
+!
+call-home
+ ! If contact email address in call-home is configured as sch-smart-licensing@cisco.com
+ ! the email address configured in Cisco Smart License Portal will be used as contact email address to send SCH notifications.
+ contact-email-addr sch-smart-licensing@cisco.com
+ profile "CiscoTAC-1"
+  active
+  destination transport-method http
+!
+!
+!
+!
+!
+end

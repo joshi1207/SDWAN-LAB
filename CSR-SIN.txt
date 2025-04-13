@@ -1,0 +1,405 @@
+
+*Sep  8 19:32:31.178: %DMI-5-AUTH_PASSED: R0/0: dmiauthd: User 'vmanage-admin' authenticated successfully from 100.1.1.12:45068 and was authorized for netconf over ssh. External groups:
+*Sep  8 19:32:41.617: %DMI-5-AUTH_PASSED: R0/0: dmiauthd: User 'vmanage-admin' authenticated successfully from 100.1.1.12:45108 and was authorized for netconf over ssh. External groups:
+!
+! Last configuration change at 13:24:54 UTC Sun Sep 8 2024 by NETCONF
+!
+version 16.12
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+! Call-home is enabled by Smart-Licensing.
+service call-home
+platform qfp utilization monitor load 80
+platform punt-keepalive disable-kernel-core
+platform inspect match-statistics per-filter
+platform console serial
+!
+hostname cEdge-SINGAPORE
+!
+boot-start-marker
+boot-end-marker
+!
+!
+vrf definition 1
+ description DATA VPN
+ rd 1:1
+ !
+ address-family ipv4
+  route-target export 1:1
+  route-target import 1:1
+ exit-address-family
+ !
+ address-family ipv6
+ exit-address-family
+!
+vrf definition 65528
+ !
+ address-family ipv4
+ exit-address-family
+!
+vrf definition Mgmt-intf
+ description MGMT VPN
+ rd 1:512
+ !
+ address-family ipv4
+  route-target export 1:512
+  route-target import 1:512
+ exit-address-family
+ !
+ address-family ipv6
+ exit-address-family
+!
+logging buffered 512000
+logging persistent size 104857600 filesize 10485760
+no logging rate-limit
+!
+aaa new-model
+!
+!
+aaa authentication login default local
+aaa authorization exec default local 
+!
+!
+!
+!
+!
+aaa session-id common
+call-home
+ ! If contact email address in call-home is configured as sch-smart-licensing@cisco.com
+ ! the email address configured in Cisco Smart License Portal will be used as contact email address to send SCH notifications.
+ contact-email-addr sch-smart-licensing@cisco.com
+ profile "CiscoTAC-1"
+  active
+  destination transport-method http
+  no destination transport-method email
+fhrp version vrrp v3
+!
+!
+!
+!
+!
+!
+!
+no ip dhcp use class
+!
+!
+!
+no ip igmp ssm-map query dns
+login on-success log
+ipv6 unicast-routing
+!
+!
+!
+!
+!
+!
+!
+subscriber templating
+! 
+! 
+! 
+! 
+!
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+crypto pki trustpoint TP-self-signed-3896066603
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-3896066603
+ revocation-check crl
+ rsakeypair TP-self-signed-3896066603
+!
+crypto pki trustpoint SLA-TrustPoint
+ enrollment pkcs12
+ revocation-check crl
+!
+!
+crypto pki certificate chain TP-self-signed-3896066603
+ certificate self-signed 01
+  30820330 30820218 A0030201 02020101 300D0609 2A864886 F70D0101 05050030 
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 33383936 30363636 3033301E 170D3234 30393038 31333033 
+  33325A17 0D333030 31303130 30303030 305A3031 312F302D 06035504 03132649 
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D33 38393630 
+  36363630 33308201 22300D06 092A8648 86F70D01 01010500 0382010F 00308201 
+  0A028201 0100B082 054F1910 FE653FFF CFC3F63F 2CA0F2D3 8A46E791 1977893C 
+  CC22FF42 516C1E7F 65873474 9AADB68A BD6B5C78 06A91A6B 00D37847 5016372E 
+  3ABC1D47 3C6D914F DF65D7C4 ACCD3EBF CE6A8599 1D5600FB D0EF689B FE45EC29 
+  B7408969 B594FDF8 0D3185BA 72575739 5A58C5CA BD80FB77 8AD7B771 F108065F 
+  90AFF0C0 9E2C266F 9529943A 5BF4A06C F900BD9F DD85DCBA 510D4066 66685031 
+  5B425D03 CEAF4FD7 90BA8966 169A8CFE CDB3C4A3 E1E0A519 68DC8D05 2514A602 
+  EC5384D8 D83776A6 3646EE88 DAC4C62F DA7919A8 4AA11BDE 76E129CB 2E0079CF 
+  0D36ACF7 73E5A4B4 37E4966A 3A3C4519 054013D2 87C3A78A FE69D4B2 3140808F 
+  1E717B91 C1C10203 010001A3 53305130 0F060355 1D130101 FF040530 030101FF 
+  301F0603 551D2304 18301680 14E3EBAA 0AFC98EC 77A844A3 91F86ABA F582C132 
+  C6301D06 03551D0E 04160414 E3EBAA0A FC98EC77 A844A391 F86ABAF5 82C132C6 
+  300D0609 2A864886 F70D0101 05050003 82010100 94D09394 8E8B6FC0 C499DE7C 
+  3F9CF745 C0780DDA 42BEA1B1 F785AA93 1690BFA4 B19B4268 9FB611C5 365F0178 
+  2F5C8990 49CDD3FC 142F261D BC3F2BCA 22979361 99E10938 D6D896B2 B8ACB45A 
+  0E319D68 FEC4C809 A29797B3 FFF9E916 759AB484 004F2BAF 588F89A8 BA38E246 
+  565E8976 0FF9134D B3CB9ABB 52B37D4B 244740A7 77F4E007 58DCADDF E9009D8A 
+  89F12394 AE9EFC5D 61409408 F20DC216 57DE7013 8473E1A2 A161B349 4D1B012A 
+  65EED36D 1A0D3560 6C95E2D1 5ADB8A5A 19A13244 665E3599 DC261830 450BD4EE 
+  8A907489 1882F8AF 15727A37 1C826544 C59883F5 10F9EE56 27B9FEE3 1244C29E 
+  41816F9B 22EE65D4 5E5F33F8 16C6063F EB3C282D
+  quit
+crypto pki certificate chain SLA-TrustPoint
+ certificate ca 01
+  30820321 30820209 A0030201 02020101 300D0609 2A864886 F70D0101 0B050030 
+  32310E30 0C060355 040A1305 43697363 6F312030 1E060355 04031317 43697363 
+  6F204C69 63656E73 696E6720 526F6F74 20434130 1E170D31 33303533 30313934 
+  3834375A 170D3338 30353330 31393438 34375A30 32310E30 0C060355 040A1305 
+  43697363 6F312030 1E060355 04031317 43697363 6F204C69 63656E73 696E6720 
+  526F6F74 20434130 82012230 0D06092A 864886F7 0D010101 05000382 010F0030 
+  82010A02 82010100 A6BCBD96 131E05F7 145EA72C 2CD686E6 17222EA1 F1EFF64D 
+  CBB4C798 212AA147 C655D8D7 9471380D 8711441E 1AAF071A 9CAE6388 8A38E520 
+  1C394D78 462EF239 C659F715 B98C0A59 5BBB5CBD 0CFEBEA3 700A8BF7 D8F256EE 
+  4AA4E80D DB6FD1C9 60B1FD18 FFC69C96 6FA68957 A2617DE7 104FDC5F EA2956AC 
+  7390A3EB 2B5436AD C847A2C5 DAB553EB 69A9A535 58E9F3E3 C0BD23CF 58BD7188 
+  68E69491 20F320E7 948E71D7 AE3BCC84 F10684C7 4BC8E00F 539BA42B 42C68BB7 
+  C7479096 B4CB2D62 EA2F505D C7B062A4 6811D95B E8250FC4 5D5D5FB8 8F27D191 
+  C55F0D76 61F9A4CD 3D992327 A8BB03BD 4E6D7069 7CBADF8B DF5F4368 95135E44 
+  DFC7C6CF 04DD7FD1 02030100 01A34230 40300E06 03551D0F 0101FF04 04030201 
+  06300F06 03551D13 0101FF04 05300301 01FF301D 0603551D 0E041604 1449DC85 
+  4B3D31E5 1B3E6A17 606AF333 3D3B4C73 E8300D06 092A8648 86F70D01 010B0500 
+  03820101 00507F24 D3932A66 86025D9F E838AE5C 6D4DF6B0 49631C78 240DA905 
+  604EDCDE FF4FED2B 77FC460E CD636FDB DD44681E 3A5673AB 9093D3B1 6C9E3D8B 
+  D98987BF E40CBD9E 1AECA0C2 2189BB5C 8FA85686 CD98B646 5575B146 8DFC66A8 
+  467A3DF4 4D565700 6ADF0F0D CF835015 3C04FF7C 21E878AC 11BA9CD2 55A9232C 
+  7CA7B7E6 C1AF74F6 152E99B7 B1FCF9BB E973DE7F 5BDDEB86 C71E3B49 1765308B 
+  5FB0DA06 B92AFE7F 494E8A9E 07B85737 F3A58BE1 1A48A229 C37C1E69 39F08678 
+  80DDCD16 D6BACECA EEBC7CF9 8428787B 35202CDC 60E4616A B623CDBD 230E3AFB 
+  418616A9 4093E049 4D10AB75 27E86F73 932E35B5 8862FDAE 0275156F 719BB2F0 
+  D697DF7F 28
+  quit
+!
+license udi pid CSR1000V sn 90JE6LMRRJ3
+diagnostic bootup level minimal
+memory free low-watermark processor 72331
+!
+!
+spanning-tree extend system-id
+!
+username admin privilege 15 secret 9 $9$3V6L3V6L2VUI2k$ysPnXOdg8RLj9KgMdmfHdSHkdaMmiHzGaUpcqH6pfTo
+!
+redundancy
+!
+!
+!
+no crypto ikev2 diagnose error
+!
+!
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+! 
+! 
+!
+!
+interface Loopback65528
+ no shutdown
+ vrf forwarding 65528
+ ip address 192.168.1.1 255.255.255.255
+!
+interface Tunnel1
+ no shutdown
+ ip unnumbered GigabitEthernet1
+ no ip redirects
+ ipv6 unnumbered GigabitEthernet1
+ no ipv6 redirects
+ tunnel source GigabitEthernet1
+ tunnel mode sdwan
+!
+interface Tunnel2
+ no shutdown
+ ip unnumbered GigabitEthernet2
+ no ip redirects
+ ipv6 unnumbered GigabitEthernet2
+ no ipv6 redirects
+ tunnel source GigabitEthernet2
+ tunnel mode sdwan
+!
+interface GigabitEthernet1
+ no shutdown
+ ip address 118.1.5.1 255.255.255.0
+ no ip redirects
+ ip nat outside
+ load-interval 30
+ negotiation auto
+ arp timeout 1200
+ no mop enabled
+ no mop sysid
+!
+interface GigabitEthernet2
+ no shutdown
+ ip address 10.1.15.1 255.255.255.0
+ no ip redirects
+ ip ospf network point-to-point
+ ip ospf dead-interval 40
+ ip ospf 65535 area 0
+ load-interval 30
+ negotiation auto
+ arp timeout 1200
+ no mop enabled
+ no mop sysid
+!
+interface GigabitEthernet3
+ no shutdown
+ vrf forwarding 1
+ ip address 172.175.1.1 255.255.255.0
+ no ip redirects
+ ip ospf network broadcast
+ ip ospf dead-interval 40
+ ip ospf 1 area 0
+ load-interval 30
+ negotiation auto
+ arp timeout 1200
+ no mop enabled
+ no mop sysid
+!
+interface GigabitEthernet4
+ no shutdown
+ vrf forwarding Mgmt-intf
+ ip dhcp client default-router distance 1
+ ip address dhcp client-id GigabitEthernet4
+ no ip redirects
+ load-interval 30
+ negotiation auto
+ arp timeout 1200
+ no mop enabled
+ no mop sysid
+!
+interface GigabitEthernet5
+ no shutdown
+ no ip address
+ negotiation auto
+ no mop enabled
+ no mop sysid
+!
+interface GigabitEthernet6
+ no shutdown
+ no ip address
+ negotiation auto
+ no mop enabled
+ no mop sysid
+!
+interface GigabitEthernet7
+ no shutdown
+ no ip address
+ negotiation auto
+ no mop enabled
+ no mop sysid
+!
+interface GigabitEthernet8
+ no shutdown
+ no ip address
+ negotiation auto
+ no mop enabled
+ no mop sysid
+!
+router omp
+!
+router ospf 1 vrf 1
+ timers throttle spf 200 1000 10000
+ redistribute omp
+!
+router ospf 65535
+ timers throttle spf 200 1000 10000
+!
+ip forward-protocol nd
+no ip http server
+ip http secure-server
+!
+ip nat route vrf 65528 0.0.0.0 0.0.0.0 global
+ip nat translation tcp-timeout 3600
+ip nat translation udp-timeout 60
+no ip nat service skinny tcp port 2000
+no ip nat service sip tcp port 5060
+no ip nat service sip udp port 5060
+no ip nat service H225
+no ip nat service ras
+no ip nat service rtsp udp
+no ip nat service rtsp tcp
+no ip nat service dns tcp
+no ip nat service dns udp
+no ip nat service netbios-ns tcp
+no ip nat service netbios-ns udp
+no ip nat service netbios-ssn
+no ip nat service netbios-dgm
+no ip nat service ldap
+no ip nat service sunrpc udp
+no ip nat service sunrpc tcp
+no ip nat service msrpc tcp
+no ip nat service tftp
+no ip nat service rcmd
+no ip nat service pptp
+no ip nat service ftp
+no ip nat service gatekeeper
+no ip nat service dns-reset-ttl
+ip nat inside source list nat-dia-vpn-hop-access-list interface GigabitEthernet1 overload
+ip route 0.0.0.0 0.0.0.0 118.1.5.2
+ip scp server enable
+!
+!
+!
+!
+!
+!
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+line con 0
+ stopbits 1
+ speed 115200
+line vty 0 4
+ transport input ssh
+line vty 5 80
+ transport input ssh
+!
+nat64 translation timeout udp 300
+nat64 translation timeout tcp 3600
+!
+!
+!
+!
+!
+netconf-yang
+netconf-yang feature candidate-datastore
+end
+
+cEdge-SINGAPORE
